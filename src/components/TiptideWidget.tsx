@@ -6,7 +6,7 @@ import { RealtimeActivity } from './RealtimeActivity';
 import { LoadingSpinner } from './LoadingSpinner';
 import { TiptideConfig, PaymentData } from '@/types/nostr';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { toast } from '@/hooks/use-toast';
 
@@ -19,17 +19,17 @@ const DEMO_PAYMENTS: PaymentData[] = [
   {
     amount: 21000, // 21 sats in millisats
     timestamp: Date.now() - 5 * 60 * 1000, // 5 minutes ago
-    message: "Great content! ⚡"
+    message: "BRUTAL CONTENT! ⚡"
   },
   {
     amount: 100000, // 100 sats
     timestamp: Date.now() - 15 * 60 * 1000, // 15 minutes ago
-    message: "This deserves more attention"
+    message: "THIS HITS DIFFERENT"
   },
   {
     amount: 5000, // 5 sats
     timestamp: Date.now() - 30 * 60 * 1000, // 30 minutes ago
-    message: "Small tip but big support 🙏"
+    message: "SMALL BUT MIGHTY 🙏"
   },
   {
     amount: 50000, // 50 sats
@@ -38,7 +38,7 @@ const DEMO_PAYMENTS: PaymentData[] = [
   {
     amount: 210000, // 210 sats
     timestamp: Date.now() - 6 * 60 * 60 * 1000, // 6 hours ago
-    message: "Excellent work!"
+    message: "EXCELLENT WORK!"
   }
 ];
 
@@ -75,7 +75,7 @@ export function TiptideWidget({
 
   const handleTipClick = () => {
     toast({
-      title: "Ready to tip! ⚡",
+      title: "READY TO TIP! ⚡",
       description: "Lightning payments integration coming soon. This demo shows real Nostr payment data.",
     });
   };
@@ -83,47 +83,55 @@ export function TiptideWidget({
   const toggleDemo = () => {
     setShowDemo(!showDemo);
     toast({
-      title: showDemo ? "Live Mode" : "Demo Mode",
+      title: showDemo ? "LIVE MODE ACTIVATED" : "DEMO MODE ACTIVATED",
       description: showDemo ? "Connecting to Nostr relays..." : "Showing demo payment data",
     });
   };
 
   if (compactMode) {
     return (
-      <Card className={`p-3 bg-card/80 backdrop-blur-sm border-border/50 ${className}`}>
-        <div className="flex items-center justify-between">
-          <PaymentStatsDisplay stats={displayStats} loading={loading && !showDemo} compact />
-          <Button 
-            size="sm" 
-            className="bg-gradient-lightning text-primary-foreground hover:opacity-90 shadow-glow"
-            onClick={handleTipClick}
-          >
-            Tip ⚡
-          </Button>
-        </div>
-        {!isConnected && !showDemo && (
-          <div className="mt-2 text-xs text-warning">
-            Connecting to Nostr...
+      <Card className={`brutal-card bg-card/90 backdrop-blur-sm ${className}`}>
+        <CardContent className="p-4">
+          <div className="flex items-center justify-between space-x-4">
+            <PaymentStatsDisplay stats={displayStats} loading={loading && !showDemo} compact />
+            <Button 
+              variant="bitcoin"
+              size="sm" 
+              onClick={handleTipClick}
+              className="font-jetbrains"
+            >
+              TIP ⚡
+            </Button>
           </div>
-        )}
+          {!isConnected && !showDemo && (
+            <div className="mt-3 text-center">
+              <Badge variant="outline" className="brutal-border bg-cyber-blue/20 text-foreground font-jetbrains font-bold">
+                CONNECTING TO NOSTR...
+              </Badge>
+            </div>
+          )}
+        </CardContent>
       </Card>
     );
   }
 
   return (
-    <Card className={`p-4 bg-card/90 backdrop-blur-sm border-border/50 shadow-bitcoin ${className}`}>
-      <div className="space-y-4">
+    <Card className={`brutal-card bg-card/95 backdrop-blur-sm ${className}`}>
+      <CardHeader className="space-y-0 pb-4">
         {/* Header */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <h3 className="font-semibold text-lg bg-gradient-bitcoin bg-clip-text text-transparent">
-              Tiptide
-            </h3>
+          <div className="flex items-center space-x-4">
+            <CardTitle className="bg-gradient-bitcoin bg-clip-text text-transparent font-space">
+              TIPTIDE
+            </CardTitle>
             <Badge 
-              variant="secondary" 
-              className={`text-xs ${isConnected ? 'bg-success/20 text-success' : 'bg-warning/20 text-warning'}`}
+              className={`brutal-border font-jetbrains font-bold uppercase tracking-widest ${
+                isConnected 
+                  ? 'bg-neon-green text-primary-foreground brutal-shadow-color' 
+                  : 'bg-cyber-blue/30 text-foreground brutal-shadow'
+              }`}
             >
-              {isConnected ? '⚡ Live' : '🔄 Connecting'}
+              {isConnected ? '⚡ LIVE' : '🔄 CONNECTING'}
             </Badge>
           </div>
           
@@ -131,25 +139,31 @@ export function TiptideWidget({
             variant="outline"
             size="sm"
             onClick={toggleDemo}
-            className="text-xs"
+            className="font-jetbrains"
           >
-            {showDemo ? 'Live Mode' : 'Demo Mode'}
+            {showDemo ? 'LIVE' : 'DEMO'}
           </Button>
         </div>
+      </CardHeader>
 
+      <CardContent className="space-y-6">
         {/* Loading State */}
         {loading && !showDemo && (
-          <div className="py-8">
-            <LoadingSpinner size="lg" message="Connecting to Nostr relays..." />
+          <div className="py-12 text-center">
+            <LoadingSpinner size="lg" message="CONNECTING TO NOSTR RELAYS..." />
           </div>
         )}
 
         {/* Error State */}
         {error && !showDemo && (
-          <div className="text-center py-6 space-y-3">
-            <div className="text-destructive text-sm">{error}</div>
-            <Button variant="outline" size="sm" onClick={reconnect}>
-              Retry Connection
+          <div className="text-center py-8 space-y-4">
+            <div className="brutal-border bg-destructive/20 p-4 brutal-shadow">
+              <div className="text-lg font-bold uppercase tracking-wider text-foreground font-jetbrains">
+                ⚠️ {error.toUpperCase()}
+              </div>
+            </div>
+            <Button variant="outline" onClick={reconnect} className="font-jetbrains">
+              RETRY CONNECTION
             </Button>
           </div>
         )}
@@ -158,12 +172,12 @@ export function TiptideWidget({
         {(!loading || showDemo) && !error && (
           <>
             {/* Social Proof Message */}
-            <div className="text-center py-2">
+            <div className="py-4">
               <SocialProofMessage stats={displayStats} loading={loading && !showDemo} />
             </div>
 
             {/* Payment Stats */}
-            <div className="bg-muted/30 rounded-lg p-4">
+            <div className="brutal-border bg-muted/20 p-6 brutal-shadow">
               <PaymentStatsDisplay stats={displayStats} loading={loading && !showDemo} />
             </div>
 
@@ -176,24 +190,28 @@ export function TiptideWidget({
             )}
 
             {/* Action Button */}
-            <div className="flex justify-center pt-2">
+            <div className="flex justify-center pt-4">
               <Button 
-                className="bg-gradient-lightning text-primary-foreground hover:opacity-90 shadow-glow animate-pulse-glow"
+                variant="neon"
+                size="lg"
                 onClick={handleTipClick}
+                className="font-jetbrains text-xl"
               >
-                {displayStats.totalCount > 0 ? 'Join the tips! ⚡' : 'Be the first to tip! ⚡'}
+                {displayStats.totalCount > 0 ? 'JOIN THE TIP FRENZY! ⚡' : 'BREAK THE SILENCE! ⚡'}
               </Button>
             </div>
 
             {/* Connection Status */}
             {!showDemo && (
-              <div className="text-xs text-muted-foreground text-center">
-                Connected to {connections.filter(c => c.connected).length}/{connections.length} relays
+              <div className="text-center brutal-border bg-card/50 p-3 brutal-shadow-sm">
+                <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground font-jetbrains">
+                  CONNECTED TO {connections.filter(c => c.connected).length}/{connections.length} RELAYS
+                </div>
               </div>
             )}
           </>
         )}
-      </div>
+      </CardContent>
     </Card>
   );
 }

@@ -8,50 +8,55 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 220 15% 96%;
-    --foreground: 220 10% 8%;
+    /* Neo Brutalist Base Colors */
+    --background: 0 0% 98%; /* Near white */
+    --foreground: 0 0% 5%; /* Near black */
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 10% 8%;
+    --card: 0 0% 100%; /* Pure white */
+    --card-foreground: 0 0% 5%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 10% 8%;
+    --popover-foreground: 0 0% 5%;
 
-    /* Bitcoin/Lightning Theme Colors */
-    --primary: 38 92% 50%; /* Bitcoin Orange */
-    --primary-foreground: 0 0% 100%;
+    /* Neo Brutalist Primary Colors */
+    --primary: 0 0% 5%; /* Pure black */
+    --primary-foreground: 0 0% 100%; /* Pure white */
 
-    --secondary: 190 84% 45%; /* Lightning Blue */
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 38 100% 50%; /* Aggressive orange */
+    --secondary-foreground: 0 0% 5%;
 
-    --muted: 220 15% 92%;
-    --muted-foreground: 220 10% 45%;
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 20%;
 
-    --accent: 48 95% 53%; /* Lightning Yellow */
-    --accent-foreground: 220 10% 8%;
+    --accent: 280 100% 70%; /* Electric purple */
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 100% 50%; /* Pure red */
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 86%;
-    --input: 220 15% 86%;
-    --ring: 38 92% 50%;
+    --border: 0 0% 5%; /* Thick black borders */
+    --input: 0 0% 95%;
+    --ring: 0 0% 5%;
 
-    /* Custom Tiptide Colors */
-    --bitcoin: 38 92% 50%;
-    --lightning: 48 95% 53%;
-    --teal: 190 84% 45%;
-    --success: 142 76% 36%;
-    --warning: 43 96% 56%;
+    /* Neo Brutalist Custom Colors */
+    --bitcoin: 38 100% 50%; /* Aggressive Bitcoin orange */
+    --lightning: 60 100% 50%; /* Electric yellow */
+    --neon-green: 120 100% 50%; /* Electric green */
+    --cyber-blue: 200 100% 60%; /* Cyber blue */
+    --hot-pink: 320 100% 60%; /* Hot pink */
+    --brutal-purple: 280 100% 70%; /* Electric purple */
+    
+    /* Neo Brutalist Effects */
+    --shadow-brutal: 8px 8px 0px hsl(0 0% 5%);
+    --shadow-brutal-hover: 12px 12px 0px hsl(0 0% 5%);
+    --shadow-brutal-sm: 4px 4px 0px hsl(0 0% 5%);
+    --shadow-brutal-color: 8px 8px 0px hsl(38 100% 50%);
+    --shadow-brutal-neon: 8px 8px 0px hsl(280 100% 70%);
     
     /* Gradients */
-    --gradient-bitcoin: linear-gradient(135deg, hsl(38 92% 50%), hsl(48 95% 53%));
-    --gradient-lightning: linear-gradient(135deg, hsl(48 95% 53%), hsl(190 84% 45%));
-    --gradient-success: linear-gradient(135deg, hsl(142 76% 36%), hsl(38 92% 50%));
-    
-    /* Shadows */
-    --shadow-glow: 0 0 20px hsl(48 95% 53% / 0.3);
-    --shadow-bitcoin: 0 4px 20px hsl(38 92% 50% / 0.25);
+    --gradient-brutal: linear-gradient(45deg, hsl(0 0% 5%), hsl(0 0% 15%));
+    --gradient-bitcoin: linear-gradient(45deg, hsl(38 100% 50%), hsl(60 100% 50%));
+    --gradient-neon: linear-gradient(45deg, hsl(280 100% 70%), hsl(320 100% 60%));
 
     --radius: 0.5rem;
 
@@ -73,49 +78,54 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 220 15% 6%;
-    --foreground: 220 10% 92%;
+    /* Dark Neo Brutalist */
+    --background: 0 0% 8%; /* Almost black */
+    --foreground: 0 0% 98%; /* Almost white */
 
-    --card: 220 15% 8%;
-    --card-foreground: 220 10% 92%;
+    --card: 0 0% 5%; /* Pure black */
+    --card-foreground: 0 0% 98%;
 
-    --popover: 220 15% 8%;
-    --popover-foreground: 220 10% 92%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 38 92% 55%;
-    --primary-foreground: 220 15% 6%;
+    --primary: 0 0% 98%; /* White on dark */
+    --primary-foreground: 0 0% 5%;
 
-    --secondary: 190 84% 50%;
-    --secondary-foreground: 220 15% 6%;
+    --secondary: 38 100% 60%; /* Brighter orange for dark */
+    --secondary-foreground: 0 0% 5%;
 
-    --muted: 220 15% 12%;
-    --muted-foreground: 220 10% 60%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 70%;
 
-    --accent: 48 95% 58%;
-    --accent-foreground: 220 15% 6%;
+    --accent: 280 100% 80%; /* Brighter purple for dark */
+    --accent-foreground: 0 0% 5%;
 
-    --destructive: 0 84% 65%;
-    --destructive-foreground: 220 15% 6%;
+    --destructive: 0 100% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 220 15% 15%;
-    --input: 220 15% 15%;
-    --ring: 38 92% 55%;
+    --border: 0 0% 98%; /* White borders on dark */
+    --input: 0 0% 10%;
+    --ring: 0 0% 98%;
 
-    /* Dark mode custom colors */
-    --bitcoin: 38 92% 55%;
-    --lightning: 48 95% 58%;
-    --teal: 190 84% 50%;
-    --success: 142 76% 40%;
-    --warning: 43 96% 60%;
+    /* Dark mode brutal colors */
+    --bitcoin: 38 100% 60%;
+    --lightning: 60 100% 60%;
+    --neon-green: 120 100% 60%;
+    --cyber-blue: 200 100% 70%;
+    --hot-pink: 320 100% 70%;
+    --brutal-purple: 280 100% 80%;
     
-    /* Dark mode gradients */
-    --gradient-bitcoin: linear-gradient(135deg, hsl(38 92% 55%), hsl(48 95% 58%));
-    --gradient-lightning: linear-gradient(135deg, hsl(48 95% 58%), hsl(190 84% 50%));
-    --gradient-success: linear-gradient(135deg, hsl(142 76% 40%), hsl(38 92% 55%));
+    /* Dark brutal effects */
+    --shadow-brutal: 8px 8px 0px hsl(0 0% 98%);
+    --shadow-brutal-hover: 12px 12px 0px hsl(0 0% 98%);
+    --shadow-brutal-sm: 4px 4px 0px hsl(0 0% 98%);
+    --shadow-brutal-color: 8px 8px 0px hsl(38 100% 60%);
+    --shadow-brutal-neon: 8px 8px 0px hsl(280 100% 80%);
     
-    /* Dark mode shadows */
-    --shadow-glow: 0 0 25px hsl(48 95% 58% / 0.4);
-    --shadow-bitcoin: 0 4px 25px hsl(38 92% 55% / 0.3);
+    /* Dark gradients */
+    --gradient-brutal: linear-gradient(45deg, hsl(0 0% 5%), hsl(0 0% 20%));
+    --gradient-bitcoin: linear-gradient(45deg, hsl(38 100% 60%), hsl(60 100% 60%));
+    --gradient-neon: linear-gradient(45deg, hsl(280 100% 80%), hsl(320 100% 70%));
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -133,6 +143,65 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-space;
+  }
+  
+  /* Neo Brutalist Typography */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-space font-bold;
+  }
+  
+  .font-display {
+    @apply font-space font-bold;
+  }
+  
+  .font-mono {
+    @apply font-jetbrains;
+  }
+}
+
+/* Neo Brutalist Utility Classes */
+@layer components {
+  .brutal-border {
+    @apply border-4 border-primary;
+  }
+  
+  .brutal-shadow {
+    box-shadow: var(--shadow-brutal);
+  }
+  
+  .brutal-shadow-hover {
+    box-shadow: var(--shadow-brutal-hover);
+  }
+  
+  .brutal-shadow-sm {
+    box-shadow: var(--shadow-brutal-sm);
+  }
+  
+  .brutal-shadow-color {
+    box-shadow: var(--shadow-brutal-color);
+  }
+  
+  .brutal-shadow-neon {
+    box-shadow: var(--shadow-brutal-neon);
+  }
+  
+  .brutal-card {
+    @apply brutal-border brutal-shadow bg-card;
+  }
+  
+  .brutal-button {
+    @apply brutal-border brutal-shadow font-bold uppercase tracking-wider;
+    transition: all 0.1s ease;
+  }
+  
+  .brutal-button:hover {
+    @apply brutal-shadow-hover;
+    transform: translate(-4px, -4px);
+  }
+  
+  .brutal-button:active {
+    @apply brutal-shadow-sm;
+    transform: translate(2px, 2px);
   }
 }

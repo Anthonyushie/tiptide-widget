@@ -22,7 +22,7 @@ export function RealtimeActivity({ payments, showActivity, limit = 3 }: Realtime
     // Check if there's a new payment
     if (recentPayments.length > visiblePayments.length && visiblePayments.length > 0) {
       setNewPaymentIndex(0);
-      setTimeout(() => setNewPaymentIndex(-1), 2000);
+      setTimeout(() => setNewPaymentIndex(-1), 3000);
     }
 
     setVisiblePayments(recentPayments);
@@ -37,54 +37,58 @@ export function RealtimeActivity({ payments, showActivity, limit = 3 }: Realtime
     if (sats >= 1000000) {
       return `${(sats / 1000000).toFixed(1)}M`;
     } else if (sats >= 1000) {
-      return `${(sats / 1000).toFixed(1)}k`;
+      return `${(sats / 1000).toFixed(1)}K`;
     }
     return sats.toString();
   };
 
-  const truncateMessage = (message: string | undefined, maxLength: number = 30) => {
+  const truncateMessage = (message: string | undefined, maxLength: number = 25) => {
     if (!message) return '';
     return message.length > maxLength ? `${message.slice(0, maxLength)}...` : message;
   };
 
   return (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between">
-        <h4 className="text-sm font-medium text-muted-foreground">Recent Activity</h4>
-        <div className="h-2 w-2 bg-success rounded-full animate-pulse" />
+    <div className="space-y-4">
+      <div className="flex items-center justify-between brutal-border bg-card p-3 brutal-shadow">
+        <h4 className="text-lg font-bold uppercase tracking-wider text-foreground font-space">
+          RECENT ACTIVITY
+        </h4>
+        <div className="h-4 w-4 bg-neon-green brutal-border brutal-shadow-sm animate-brutal-bounce font-bold" />
       </div>
       
-      <div className="space-y-2 max-h-32 overflow-y-auto">
+      <div className="space-y-3 max-h-40 overflow-y-auto">
         {visiblePayments.map((payment, index) => (
           <div
             key={`${payment.timestamp}-${index}`}
-            className={`flex items-center justify-between text-xs p-2 rounded-md border transition-all duration-500 ${
+            className={`flex items-center justify-between p-4 brutal-border transition-all duration-500 ${
               index === newPaymentIndex
-                ? 'bg-success/10 border-success animate-pulse-glow'
-                : 'bg-card/50 border-border/50'
+                ? 'bg-gradient-neon text-primary-foreground brutal-shadow-neon animate-neon-pulse'
+                : 'bg-card brutal-shadow'
             }`}
           >
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center space-x-2">
-                <span className="font-medium text-bitcoin">
-                  {formatAmount(payment.amount)} sats
-                </span>
-                <span className="text-muted-foreground text-xs">
+            <div className="flex-1 min-w-0 space-y-1">
+              <div className="flex items-center space-x-3">
+                <div className="font-jetbrains font-bold text-lg">
+                  {formatAmount(payment.amount)} SATS
+                </div>
+                <div className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
                   {formatDistanceToNow(new Date(payment.timestamp), { addSuffix: true })}
-                </span>
+                </div>
               </div>
               {payment.message && (
-                <div className="text-muted-foreground text-xs mt-1 truncate">
+                <div className="text-sm font-medium truncate bg-black/10 p-2 brutal-border brutal-shadow-sm">
                   "{truncateMessage(payment.message)}"
                 </div>
               )}
             </div>
             
-            <div className="ml-2">
+            <div className="ml-4">
               {index === newPaymentIndex ? (
-                <span className="text-xs text-success font-medium">NEW</span>
+                <div className="text-sm font-bold uppercase tracking-widest brutal-border bg-hot-pink text-primary-foreground px-2 py-1 brutal-shadow-sm">
+                  NEW!
+                </div>
               ) : (
-                <div className="h-4 w-4 bg-gradient-lightning rounded-full opacity-60" />
+                <div className="h-6 w-6 bg-gradient-bitcoin brutal-border brutal-shadow-sm" />
               )}
             </div>
           </div>
@@ -92,8 +96,10 @@ export function RealtimeActivity({ payments, showActivity, limit = 3 }: Realtime
       </div>
       
       {payments.length > limit && (
-        <div className="text-xs text-muted-foreground text-center pt-1">
-          +{payments.length - limit} more tips
+        <div className="text-center brutal-border bg-muted/30 p-3 brutal-shadow-sm">
+          <div className="text-sm font-bold uppercase tracking-wider text-muted-foreground font-jetbrains">
+            +{payments.length - limit} MORE TIPS
+          </div>
         </div>
       )}
     </div>

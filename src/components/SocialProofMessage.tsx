@@ -8,34 +8,34 @@ interface SocialProofMessageProps {
 
 const MESSAGES = {
   empty: [
-    "⚡ Be the first to show some love!",
-    "🎯 Start the tipping wave!",
-    "✨ This post deserves some sats!",
-    "🚀 Launch this post into orbit with tips!"
+    "⚡ BREAK THE SILENCE - TIP FIRST!",
+    "🎯 START THE CHAOS - TIP NOW!",
+    "✨ UNLEASH THE STORM - TIP THIS!",
+    "🚀 IGNITE THE FRENZY - TIP HARD!"
   ],
   few: [
-    "🔥 Others are already tipping!",
-    "⚡ Join the appreciation party!",
-    "💫 People love this content!",
-    "🎉 The community is showing support!"
+    "🔥 OTHERS ARE ALREADY TIPPING!",
+    "⚡ JOIN THE TIP REVOLUTION!",
+    "💫 PEOPLE ARE LOVING THIS!",
+    "🎉 THE COMMUNITY IS PUMPED!"
   ],
   many: [
-    "🚀 This post is taking off!",
-    "⚡ Lightning is striking here!",
-    "🔥 This content is on fire!",
-    "💎 Quality content gets quality tips!"
+    "🚀 THIS POST IS EXPLODING!",
+    "⚡ LIGHTNING IS STRIKING!",
+    "🔥 CONTENT IS ON FIRE!",
+    "💎 QUALITY GETS QUALITY TIPS!"
   ],
   trending: [
-    "🌟 This post is trending with tips!",
-    "⚡ Lightning storm incoming!",
-    "🔥 Viral content alert!",
-    "💰 The sats are flowing!"
+    "🌟 VIRAL TIPPING MADNESS!",
+    "⚡ LIGHTNING STORM INCOMING!",
+    "🔥 BRUTAL TIP EXPLOSION!",
+    "💰 SATS ARE FLOWING HARD!"
   ],
   recent: [
-    "🔥 Hot! Recent tipping activity!",
-    "⚡ Active tipping happening now!",
-    "💫 This post is getting attention!",
-    "🎯 Tip momentum building!"
+    "🔥 HOT! RECENT TIP ACTIVITY!",
+    "⚡ ACTIVE TIPPING RIGHT NOW!",
+    "💫 THIS POST IS TRENDING!",
+    "🎯 TIP MOMENTUM BUILDING!"
   ]
 };
 
@@ -65,7 +65,7 @@ export function SocialProofMessage({ stats, loading }: SocialProofMessageProps) 
     // Cycle through messages in the category
     const interval = setInterval(() => {
       setMessageIndex(prev => (prev + 1) % MESSAGES[category].length);
-    }, 4000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [stats, loading]);
@@ -73,7 +73,7 @@ export function SocialProofMessage({ stats, loading }: SocialProofMessageProps) 
   if (loading) {
     return (
       <div className="text-center">
-        <div className="h-5 w-48 bg-muted animate-pulse rounded mx-auto" />
+        <div className="h-12 w-80 bg-muted brutal-border brutal-shadow animate-pulse mx-auto" />
       </div>
     );
   }
@@ -85,25 +85,29 @@ export function SocialProofMessage({ stats, loading }: SocialProofMessageProps) 
     switch (currentCategory) {
       case 'trending':
       case 'recent':
-        return "text-success font-semibold animate-pulse-glow";
+        return "brutal-card bg-gradient-neon text-primary-foreground text-xl font-bold uppercase tracking-widest animate-neon-pulse";
       case 'many':
-        return "text-bitcoin font-medium";
+        return "brutal-card bg-gradient-bitcoin text-primary-foreground text-lg font-bold uppercase tracking-wider brutal-shadow-color";
       case 'few':
-        return "text-lightning";
+        return "brutal-card bg-lightning/20 text-foreground text-base font-bold uppercase tracking-wide brutal-shadow";
       default:
-        return "text-muted-foreground";
+        return "brutal-card bg-muted/50 text-foreground text-base font-bold uppercase tracking-wide";
     }
   };
 
   return (
-    <div className="text-center">
-      <div className={`text-sm transition-all duration-500 animate-slide-up ${getMessageStyle()}`}>
-        {currentMessage}
+    <div className="text-center space-y-4">
+      <div className={`p-6 transition-all duration-500 animate-slide-brutal ${getMessageStyle()}`}>
+        <div className="font-jetbrains">
+          {currentMessage}
+        </div>
       </div>
       
       {stats.totalCount > 0 && (
-        <div className="mt-2 text-xs text-muted-foreground">
-          {stats.totalCount} {stats.totalCount === 1 ? 'person has' : 'people have'} tipped this content
+        <div className="brutal-border bg-card p-3 brutal-shadow-sm">
+          <div className="text-sm font-bold uppercase tracking-wider text-muted-foreground font-jetbrains">
+            {stats.totalCount} {stats.totalCount === 1 ? 'PERSON HAS' : 'PEOPLE HAVE'} TIPPED THIS CONTENT
+          </div>
         </div>
       )}
     </div>
