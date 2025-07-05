@@ -52,6 +52,12 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				// Tiptide theme colors
+				bitcoin: 'hsl(var(--bitcoin))',
+				lightning: 'hsl(var(--lightning))',
+				teal: 'hsl(var(--teal))',
+				success: 'hsl(var(--success))',
+				warning: 'hsl(var(--warning))',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -84,11 +90,47 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'pulse-glow': {
+					'0%, 100%': { 
+						opacity: '1',
+						boxShadow: '0 0 20px hsl(var(--lightning) / 0.3)'
+					},
+					'50%': { 
+						opacity: '0.8',
+						boxShadow: '0 0 30px hsl(var(--lightning) / 0.6)'
+					}
+				},
+				'slide-up': {
+					from: { 
+						opacity: '0',
+						transform: 'translateY(10px)' 
+					},
+					to: { 
+						opacity: '1',
+						transform: 'translateY(0)' 
+					}
+				},
+				'counter-up': {
+					from: { transform: 'translateY(10px)', opacity: '0' },
+					to: { transform: 'translateY(0)', opacity: '1' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+				'slide-up': 'slide-up 0.3s ease-out',
+				'counter-up': 'counter-up 0.5s ease-out'
+			},
+			backgroundImage: {
+				'gradient-bitcoin': 'var(--gradient-bitcoin)',
+				'gradient-lightning': 'var(--gradient-lightning)',
+				'gradient-success': 'var(--gradient-success)'
+			},
+			boxShadow: {
+				'glow': 'var(--shadow-glow)',
+				'bitcoin': 'var(--shadow-bitcoin)'
 			}
 		}
 	},
