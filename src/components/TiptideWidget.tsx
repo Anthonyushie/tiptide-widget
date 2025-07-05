@@ -56,7 +56,7 @@ export function TiptideWidget({
     relays
   );
 
-  // Use demo data if in demo mode
+  // Use demo data if in demo mode, otherwise use real data
   const displayPayments = showDemo ? DEMO_PAYMENTS : payments;
   const displayStats = showDemo ? {
     totalAmount: 386, // Total sats from demo data
@@ -76,15 +76,21 @@ export function TiptideWidget({
   const handleTipClick = () => {
     toast({
       title: "Ready to tip! ⚡",
-      description: "Lightning payments integration coming soon. This demo shows real Nostr payment data.",
+      description: showDemo 
+        ? "This is demo mode. In live mode, this would open a Lightning payment interface."
+        : "Lightning payment integration would open here. Currently showing real Nostr zap data.",
     });
   };
 
   const toggleDemo = () => {
-    setShowDemo(!showDemo);
+    const newDemoMode = !showDemo;
+    setShowDemo(newDemoMode);
+    
     toast({
-      title: showDemo ? "Live mode activated" : "Demo mode activated",
-      description: showDemo ? "Connecting to Nostr relays..." : "Showing demo payment data",
+      title: newDemoMode ? "Demo mode activated" : "Live mode activated",
+      description: newDemoMode 
+        ? "Showing demo payment data with simulated activity"
+        : "Connecting to Nostr relays for real zap data...",
     });
   };
 
@@ -106,7 +112,7 @@ export function TiptideWidget({
           {!isConnected && !showDemo && (
             <div className="mt-3 text-center">
               <Badge variant="outline" className="font-jetbrains font-semibold">
-                Connecting to Nostr...
+                {loading ? 'Connecting to Nostr...' : 'Connection failed'}
               </Badge>
             </div>
           )}
@@ -128,7 +134,7 @@ export function TiptideWidget({
               variant={isConnected ? 'success' : 'outline'}
               className="font-jetbrains font-semibold"
             >
-              {isConnected ? '⚡ Live' : '🔄 Connecting'}
+              {showDemo ? '🎭 Demo' : isConnected ? '⚡ Live' : loading ? '🔄 Connecting' : '❌ Offline'}
             </Badge>
           </div>
           
@@ -138,7 +144,7 @@ export function TiptideWidget({
             onClick={toggleDemo}
             className="font-jetbrains"
           >
-            {showDemo ? 'Live' : 'Demo'}
+            {showDemo ? 'Go Live' : 'Demo Mode'}
           </Button>
         </div>
       </CardHeader>
@@ -203,6 +209,13 @@ export function TiptideWidget({
               <div className="text-center brutal-border bg-card/50 p-3 brutal-shadow-sm rounded-md">
                 <div className="text-xs font-semibold text-muted-foreground font-jetbrains">
                   Connected to {connections.filter(c => c.connected).length}/{connections.length} relays
+                  {connections.length > 0 && (
+                    <div className="mt-1 text-xs">
+                      {connections.map(conn => (
+                        <span key={conn.url} className={`inline-block w-2 h-2 rounded-full mr-1 ${conn.connected ? 'bg-success' : 'bg-destructive'}`} />
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             )}

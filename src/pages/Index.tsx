@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { isValidNostrNoteId } from '@/lib/nostr';
+import { toast } from '@/hooks/use-toast';
 
 const Index = () => {
   const [postId, setPostId] = useState('note1example123456789abcdef');
@@ -25,13 +27,38 @@ const Index = () => {
       id: 'note1lightning123456789abc',
       title: 'Lightning Network Update',
       description: 'Latest improvements to Lightning Network'
+    },
+    {
+      id: 'note1zap123456789abcdefghij',
+      title: 'Real Nostr Note (Live)',
+      description: 'Try with a real Nostr note ID for live data'
     }
   ];
 
   const handleCustomPostId = () => {
-    if (customPostId.trim()) {
-      setPostId(customPostId.trim());
+    if (!customPostId.trim()) {
+      toast({
+        title: "Invalid input",
+        description: "Please enter a Nostr note ID",
+        variant: "destructive"
+      });
+      return;
     }
+
+    if (!isValidNostrNoteId(customPostId.trim())) {
+      toast({
+        title: "Invalid Nostr note ID",
+        description: "Please enter a valid note1... or hex format note ID",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setPostId(customPostId.trim());
+    toast({
+      title: "Loading note data",
+      description: "Connecting to Nostr relays to fetch zap data...",
+    });
   };
 
   return (
@@ -83,10 +110,10 @@ const Index = () => {
           </h1>
           <div className="brutal-card-accent p-8 mx-auto max-w-3xl relative z-10">
             <p className="text-3xl font-bold mb-4 font-space">
-              Clean Neo Brutalist Payment Widget
+              Real-time Nostr Zap Widget
             </p>
             <p className="text-xl font-jetbrains text-muted-foreground">
-              Social proof psychology • Lightning Network tips • Nostr protocol
+              Live Lightning Network tips • Social proof psychology • Nostr protocol
             </p>
           </div>
         </div>
@@ -107,8 +134,13 @@ const Index = () => {
               <CardContent>
                 <TiptideWidget
                   postId={postId}
-                  relays={['wss://relay.damus.io', 'wss://nos.lol']}
-                  demoMode={true}
+                  relays={[
+                    'wss://relay.damus.io',
+                    'wss://nos.lol',
+                    'wss://relay.snort.social',
+                    'wss://relay.nostr.band'
+                  ]}
+                  demoMode={false} // Start in live mode by default
                   showRealtimeActivity={true}
                   compactMode={compactMode}
                 />
@@ -163,12 +195,12 @@ const Index = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <Label htmlFor="custom-post" className="font-semibold font-jetbrains">
-                  Enter Nostr Post ID
+                  Enter Real Nostr Note ID
                 </Label>
                 <div className="flex space-x-3">
                   <Input
                     id="custom-post"
-                    placeholder="Enter Nostr post ID..."
+                    placeholder="note1... or hex format"
                     value={customPostId}
                     onChange={(e) => setCustomPostId(e.target.value)}
                     className="brutal-border font-jetbrains"
@@ -177,9 +209,12 @@ const Index = () => {
                     Load
                   </Button>
                 </div>
-                <div className="brutal-border bg-muted/20 p-3 brutal-shadow-sm rounded-md">
-                  <p className="text-xs font-semibold text-muted-foreground font-jetbrains">
-                    Enter any Nostr note ID to see real payment data
+                <div className="brutal-border bg-accent/10 p-3 brutal-shadow-sm rounded-md">
+                  <p className="text-xs font-semibold text-foreground font-jetbrains mb-2">
+                    ⚡ Live Nostr Integration Active!
+                  </p>
+                  <p className="text-xs text-muted-foreground font-jetbrains">
+                    Enter any real Nostr note ID to see live zap data from the Lightning Network
                   </p>
                 </div>
               </CardContent>
@@ -192,9 +227,9 @@ const Index = () => {
           <Card className="bg-accent/10 text-center">
             <CardContent className="p-8">
               <div className="text-6xl mb-6">⚡</div>
-              <CardTitle className="mb-4 text-foreground">Real-time Updates</CardTitle>
+              <CardTitle className="mb-4 text-foreground">Real-time Zaps</CardTitle>
               <p className="text-sm text-muted-foreground font-jetbrains">
-                Live Lightning Network payment tracking via Nostr relays
+                Live Lightning Network zap tracking via Nostr relays with WebSocket connections
               </p>
             </CardContent>
           </Card>
@@ -204,7 +239,7 @@ const Index = () => {
               <div className="text-6xl mb-6">🔥</div>
               <CardTitle className="mb-4 text-foreground">Social Proof</CardTitle>
               <p className="text-sm text-muted-foreground font-jetbrains">
-                Psychology-driven messaging to encourage more tips
+                Psychology-driven messaging that adapts based on real payment activity
               </p>
             </CardContent>
           </Card>
@@ -214,7 +249,7 @@ const Index = () => {
               <div className="text-6xl mb-6">📱</div>
               <CardTitle className="mb-4 text-foreground">Embeddable</CardTitle>
               <p className="text-sm text-muted-foreground font-jetbrains">
-                Responsive widget for social media and blog posts
+                Responsive widget for blogs, social media, and any web platform
               </p>
             </CardContent>
           </Card>
@@ -232,10 +267,10 @@ const Index = () => {
                   Nostr Integration
                 </h4>
                 <ul className="space-y-2 font-jetbrains text-sm">
-                  <li className="text-muted-foreground">• Connects to multiple Nostr relays</li>
+                  <li className="text-muted-foreground">• Real WebSocket connections to Nostr relays</li>
                   <li className="text-muted-foreground">• Subscribes to zap receipt events (kind 9735)</li>
                   <li className="text-muted-foreground">• Parses Lightning Network payment data</li>
-                  <li className="text-muted-foreground">• Real-time WebSocket connections</li>
+                  <li className="text-muted-foreground">• Historical and real-time zap tracking</li>
                 </ul>
               </div>
               <div className="brutal-border bg-accent/10 p-6 brutal-shadow-accent rounded-md">
@@ -261,7 +296,7 @@ const Index = () => {
                 Built with Nostr, Lightning Network, and modern web technologies
               </p>
               <p className="font-jetbrains text-sm text-muted-foreground">
-                Open source • Privacy focused • Decentralized
+                Open source • Privacy focused • Decentralized • Real-time
               </p>
             </CardContent>
           </Card>

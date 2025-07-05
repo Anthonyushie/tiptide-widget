@@ -12,11 +12,17 @@ export interface ZapReceipt extends NostrEvent {
   kind: 9735;
 }
 
+export interface ZapRequest extends NostrEvent {
+  kind: 9734;
+}
+
 export interface PaymentData {
   amount: number; // in millisats
   timestamp: number;
   sender?: string;
   message?: string;
+  bolt11?: string;
+  preimage?: string;
 }
 
 export interface AggregatedStats {
@@ -39,4 +45,15 @@ export interface RelayConnection {
   url: string;
   connected: boolean;
   error?: string;
+}
+
+export interface NostrFilter {
+  ids?: string[];
+  authors?: string[];
+  kinds?: number[];
+  '#e'?: string[];
+  '#p'?: string[];
+  since?: number;
+  until?: number;
+  limit?: number;
 }
