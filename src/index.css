@@ -151,4 +151,32 @@
   .gradient-text-bitcoin {
     @apply bg-gradient-to-r from-bitcoin to-warning bg-clip-text text-transparent;
   }
+
+  /* Background Pattern Animations */
+  @keyframes float-1 {
+    0%, 100% { transform: translate(0, 0) rotate(45deg); }
+    50% { transform: translate(10px, -10px) rotate(45deg); }
+  }
+
+  @keyframes float-2 {
+    0%, 100% { transform: translate(0, 0) rotate(12deg); }
+    50% { transform: translate(-8px, 8px) rotate(12deg); }
+  }
+
+  @keyframes float-3 {
+    0%, 100% { transform: translate(0, 0) rotate(-12deg); }
+    50% { transform: translate(12px, 6px) rotate(-12deg); }
+  }
+
+  .animate-float-1 {
+    animation: float-1 6s ease-in-out infinite;
+  }
+
+  .animate-float-2 {
+    animation: float-2 8s ease-in-out infinite;
+  }
+
+  .animate-float-3 {
+    animation: float-3 7s ease-in-out infinite;
+  }
 }

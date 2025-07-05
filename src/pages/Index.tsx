@@ -38,11 +38,50 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <div className="relative overflow-hidden bg-gradient-subtle">
-        <div className="container mx-auto px-6 py-24 text-center">
-          <h1 className="text-8xl font-bold mb-8 gradient-text-bitcoin font-space">
+        {/* Animated Background Pattern */}
+        <div className="absolute inset-0 opacity-20">
+          {/* Grid Pattern */}
+          <div className="absolute inset-0" style={{
+            backgroundImage: `
+              linear-gradient(hsl(var(--accent)) 1px, transparent 1px),
+              linear-gradient(90deg, hsl(var(--accent)) 1px, transparent 1px)
+            `,
+            backgroundSize: '60px 60px'
+          }} />
+          
+          {/* Floating Geometric Shapes */}
+          <div className="absolute top-20 left-20 w-32 h-32 border-4 border-accent/30 rotate-45 animate-subtle-bounce" style={{ animationDelay: '0s' }} />
+          <div className="absolute top-40 right-32 w-24 h-24 bg-bitcoin/20 border-4 border-bitcoin/40 rotate-12 animate-subtle-bounce" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-32 left-32 w-20 h-20 border-4 border-success/30 -rotate-12 animate-subtle-bounce" style={{ animationDelay: '2s' }} />
+          <div className="absolute top-60 left-1/2 w-16 h-16 bg-accent/10 border-4 border-accent/30 rotate-45 animate-subtle-bounce" style={{ animationDelay: '0.5s' }} />
+          <div className="absolute bottom-20 right-20 w-28 h-28 border-4 border-bitcoin/20 -rotate-45 animate-subtle-bounce" style={{ animationDelay: '1.5s' }} />
+          
+          {/* Lightning Bolt Shapes */}
+          <div className="absolute top-32 right-1/4 text-6xl text-accent/20 animate-pulse-glow" style={{ animationDelay: '0.5s' }}>⚡</div>
+          <div className="absolute bottom-40 left-1/4 text-4xl text-bitcoin/30 animate-pulse-glow" style={{ animationDelay: '2s' }}>⚡</div>
+          <div className="absolute top-1/2 right-16 text-5xl text-success/20 animate-pulse-glow" style={{ animationDelay: '1s' }}>⚡</div>
+          
+          {/* Diagonal Lines */}
+          <div className="absolute top-0 left-0 w-full h-full">
+            <div className="absolute top-16 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/20 to-transparent rotate-12 origin-left" />
+            <div className="absolute top-32 left-0 w-full h-1 bg-gradient-to-r from-transparent via-bitcoin/20 to-transparent -rotate-12 origin-left" />
+            <div className="absolute bottom-16 left-0 w-full h-1 bg-gradient-to-r from-transparent via-success/20 to-transparent rotate-12 origin-left" />
+          </div>
+          
+          {/* Circular Elements */}
+          <div className="absolute top-24 left-1/3 w-12 h-12 rounded-full border-4 border-accent/30 animate-subtle-bounce" style={{ animationDelay: '1.2s' }} />
+          <div className="absolute bottom-24 right-1/3 w-8 h-8 rounded-full bg-bitcoin/20 border-4 border-bitcoin/40 animate-subtle-bounce" style={{ animationDelay: '0.8s' }} />
+          <div className="absolute top-1/2 left-16 w-6 h-6 rounded-full border-4 border-success/30 animate-subtle-bounce" style={{ animationDelay: '1.8s' }} />
+        </div>
+
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background/80 via-transparent to-background/60" />
+        
+        <div className="relative container mx-auto px-6 py-24 text-center">
+          <h1 className="text-8xl font-bold mb-8 gradient-text-bitcoin font-space relative z-10">
             Tiptide
           </h1>
-          <div className="brutal-card-accent p-8 mx-auto max-w-3xl">
+          <div className="brutal-card-accent p-8 mx-auto max-w-3xl relative z-10">
             <p className="text-3xl font-bold mb-4 font-space">
               Clean Neo Brutalist Payment Widget
             </p>
