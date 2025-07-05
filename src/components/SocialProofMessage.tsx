@@ -8,34 +8,34 @@ interface SocialProofMessageProps {
 
 const MESSAGES = {
   empty: [
-    "⚡ BREAK THE SILENCE - TIP FIRST!",
-    "🎯 START THE CHAOS - TIP NOW!",
-    "✨ UNLEASH THE STORM - TIP THIS!",
-    "🚀 IGNITE THE FRENZY - TIP HARD!"
+    "⚡ Break the silence - tip first!",
+    "🎯 Start the momentum - tip now!",
+    "✨ Be the first to show appreciation!",
+    "🚀 Ignite the conversation - tip!"
   ],
   few: [
-    "🔥 OTHERS ARE ALREADY TIPPING!",
-    "⚡ JOIN THE TIP REVOLUTION!",
-    "💫 PEOPLE ARE LOVING THIS!",
-    "🎉 THE COMMUNITY IS PUMPED!"
+    "🔥 Others are already tipping!",
+    "⚡ Join the appreciation!",
+    "💫 People are loving this!",
+    "🎉 The community is engaged!"
   ],
   many: [
-    "🚀 THIS POST IS EXPLODING!",
-    "⚡ LIGHTNING IS STRIKING!",
-    "🔥 CONTENT IS ON FIRE!",
-    "💎 QUALITY GETS QUALITY TIPS!"
+    "🚀 This post is gaining traction!",
+    "⚡ Lightning is striking!",
+    "🔥 Content is resonating!",
+    "💎 Quality gets quality tips!"
   ],
   trending: [
-    "🌟 VIRAL TIPPING MADNESS!",
-    "⚡ LIGHTNING STORM INCOMING!",
-    "🔥 BRUTAL TIP EXPLOSION!",
-    "💰 SATS ARE FLOWING HARD!"
+    "🌟 Viral tipping activity!",
+    "⚡ Lightning storm incoming!",
+    "🔥 Tip explosion in progress!",
+    "💰 Sats are flowing!"
   ],
   recent: [
-    "🔥 HOT! RECENT TIP ACTIVITY!",
-    "⚡ ACTIVE TIPPING RIGHT NOW!",
-    "💫 THIS POST IS TRENDING!",
-    "🎯 TIP MOMENTUM BUILDING!"
+    "🔥 Hot! Recent tip activity!",
+    "⚡ Active tipping right now!",
+    "💫 This post is trending!",
+    "🎯 Tip momentum building!"
   ]
 };
 
@@ -73,7 +73,7 @@ export function SocialProofMessage({ stats, loading }: SocialProofMessageProps) 
   if (loading) {
     return (
       <div className="text-center">
-        <div className="h-12 w-80 bg-muted brutal-border brutal-shadow animate-pulse mx-auto" />
+        <div className="h-12 w-80 bg-muted brutal-border brutal-shadow animate-pulse mx-auto rounded-md" />
       </div>
     );
   }
@@ -85,28 +85,28 @@ export function SocialProofMessage({ stats, loading }: SocialProofMessageProps) 
     switch (currentCategory) {
       case 'trending':
       case 'recent':
-        return "brutal-card bg-gradient-neon text-primary-foreground text-xl font-bold uppercase tracking-widest animate-neon-pulse";
+        return "brutal-card-accent text-accent-foreground text-xl font-bold animate-pulse-glow";
       case 'many':
-        return "brutal-card bg-gradient-bitcoin text-primary-foreground text-lg font-bold uppercase tracking-wider brutal-shadow-color";
+        return "brutal-card bg-bitcoin/20 text-foreground text-lg font-bold brutal-shadow-bitcoin";
       case 'few':
-        return "brutal-card bg-lightning/20 text-foreground text-base font-bold uppercase tracking-wide brutal-shadow";
+        return "brutal-card bg-accent/20 text-foreground text-base font-bold brutal-shadow-accent";
       default:
-        return "brutal-card bg-muted/50 text-foreground text-base font-bold uppercase tracking-wide";
+        return "brutal-card bg-muted/50 text-foreground text-base font-bold";
     }
   };
 
   return (
     <div className="text-center space-y-4">
-      <div className={`p-6 transition-all duration-500 animate-slide-brutal ${getMessageStyle()}`}>
+      <div className={`p-6 transition-all duration-500 animate-slide-up ${getMessageStyle()} rounded-md`}>
         <div className="font-jetbrains">
           {currentMessage}
         </div>
       </div>
       
       {stats.totalCount > 0 && (
-        <div className="brutal-border bg-card p-3 brutal-shadow-sm">
-          <div className="text-sm font-bold uppercase tracking-wider text-muted-foreground font-jetbrains">
-            {stats.totalCount} {stats.totalCount === 1 ? 'PERSON HAS' : 'PEOPLE HAVE'} TIPPED THIS CONTENT
+        <div className="brutal-border bg-card p-3 brutal-shadow-sm rounded-md">
+          <div className="text-sm font-semibold text-muted-foreground font-jetbrains">
+            {stats.totalCount} {stats.totalCount === 1 ? 'person has' : 'people have'} tipped this content
           </div>
         </div>
       )}

@@ -2,138 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Clean Dark Neo Brutalist Design System */
 
 @layer base {
   :root {
-    /* Neo Brutalist Base Colors */
-    --background: 0 0% 98%; /* Near white */
-    --foreground: 0 0% 5%; /* Near black */
-
-    --card: 0 0% 100%; /* Pure white */
-    --card-foreground: 0 0% 5%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 5%;
-
-    /* Neo Brutalist Primary Colors */
-    --primary: 0 0% 5%; /* Pure black */
-    --primary-foreground: 0 0% 100%; /* Pure white */
-
-    --secondary: 38 100% 50%; /* Aggressive orange */
-    --secondary-foreground: 0 0% 5%;
-
-    --muted: 0 0% 90%;
-    --muted-foreground: 0 0% 20%;
-
-    --accent: 280 100% 70%; /* Electric purple */
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 100% 50%; /* Pure red */
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 0 0% 5%; /* Thick black borders */
-    --input: 0 0% 95%;
-    --ring: 0 0% 5%;
-
-    /* Neo Brutalist Custom Colors */
-    --bitcoin: 38 100% 50%; /* Aggressive Bitcoin orange */
-    --lightning: 60 100% 50%; /* Electric yellow */
-    --neon-green: 120 100% 50%; /* Electric green */
-    --cyber-blue: 200 100% 60%; /* Cyber blue */
-    --hot-pink: 320 100% 60%; /* Hot pink */
-    --brutal-purple: 280 100% 70%; /* Electric purple */
-    
-    /* Neo Brutalist Effects */
-    --shadow-brutal: 8px 8px 0px hsl(0 0% 5%);
-    --shadow-brutal-hover: 12px 12px 0px hsl(0 0% 5%);
-    --shadow-brutal-sm: 4px 4px 0px hsl(0 0% 5%);
-    --shadow-brutal-color: 8px 8px 0px hsl(38 100% 50%);
-    --shadow-brutal-neon: 8px 8px 0px hsl(280 100% 70%);
-    
-    /* Gradients */
-    --gradient-brutal: linear-gradient(45deg, hsl(0 0% 5%), hsl(0 0% 15%));
-    --gradient-bitcoin: linear-gradient(45deg, hsl(38 100% 50%), hsl(60 100% 50%));
-    --gradient-neon: linear-gradient(45deg, hsl(280 100% 70%), hsl(320 100% 60%));
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    /* Dark Neo Brutalist */
-    --background: 0 0% 8%; /* Almost black */
+    /* Dark Neo Brutalist Base Colors */
+    --background: 220 13% 9%; /* Deep dark blue-gray */
     --foreground: 0 0% 98%; /* Almost white */
 
-    --card: 0 0% 5%; /* Pure black */
+    --card: 220 13% 12%; /* Slightly lighter than background */
     --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 5%;
+    --popover: 220 13% 12%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 0 0% 98%; /* White on dark */
-    --primary-foreground: 0 0% 5%;
+    /* Clean Primary Colors */
+    --primary: 0 0% 98%; /* White */
+    --primary-foreground: 220 13% 9%;
 
-    --secondary: 38 100% 60%; /* Brighter orange for dark */
-    --secondary-foreground: 0 0% 5%;
+    --secondary: 220 13% 18%; /* Subtle gray */
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 70%;
+    --muted: 220 13% 15%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 280 100% 80%; /* Brighter purple for dark */
-    --accent-foreground: 0 0% 5%;
+    --accent: 142 76% 36%; /* Clean green accent */
+    --accent-foreground: 0 0% 98%;
 
-    --destructive: 0 100% 60%;
+    --destructive: 0 62% 50%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 98%; /* White borders on dark */
-    --input: 0 0% 10%;
-    --ring: 0 0% 98%;
+    --border: 220 13% 20%; /* Subtle borders */
+    --input: 220 13% 15%;
+    --ring: 142 76% 36%;
 
-    /* Dark mode brutal colors */
-    --bitcoin: 38 100% 60%;
-    --lightning: 60 100% 60%;
-    --neon-green: 120 100% 60%;
-    --cyber-blue: 200 100% 70%;
-    --hot-pink: 320 100% 70%;
-    --brutal-purple: 280 100% 80%;
+    /* Clean Neo Brutalist Colors */
+    --bitcoin: 38 92% 50%; /* Bitcoin orange */
+    --lightning: 60 100% 50%; /* Lightning yellow */
+    --success: 142 76% 36%; /* Clean green */
+    --info: 217 91% 60%; /* Clean blue */
+    --warning: 38 92% 50%; /* Warning orange */
     
-    /* Dark brutal effects */
-    --shadow-brutal: 8px 8px 0px hsl(0 0% 98%);
-    --shadow-brutal-hover: 12px 12px 0px hsl(0 0% 98%);
-    --shadow-brutal-sm: 4px 4px 0px hsl(0 0% 98%);
-    --shadow-brutal-color: 8px 8px 0px hsl(38 100% 60%);
-    --shadow-brutal-neon: 8px 8px 0px hsl(280 100% 80%);
+    /* Refined Shadow System */
+    --shadow-brutal: 4px 4px 0px hsl(0 0% 0% / 0.8);
+    --shadow-brutal-hover: 6px 6px 0px hsl(0 0% 0% / 0.8);
+    --shadow-brutal-sm: 2px 2px 0px hsl(0 0% 0% / 0.8);
+    --shadow-accent: 4px 4px 0px hsl(142 76% 36% / 0.3);
+    --shadow-bitcoin: 4px 4px 0px hsl(38 92% 50% / 0.3);
     
-    /* Dark gradients */
-    --gradient-brutal: linear-gradient(45deg, hsl(0 0% 5%), hsl(0 0% 20%));
-    --gradient-bitcoin: linear-gradient(45deg, hsl(38 100% 60%), hsl(60 100% 60%));
-    --gradient-neon: linear-gradient(45deg, hsl(280 100% 80%), hsl(320 100% 70%));
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Clean Gradients */
+    --gradient-subtle: linear-gradient(135deg, hsl(220 13% 12%), hsl(220 13% 15%));
+    --gradient-accent: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 46%));
+    --gradient-bitcoin: linear-gradient(135deg, hsl(38 92% 50%), hsl(38 92% 60%));
+
+    --radius: 0.375rem;
+
+    --sidebar-background: 220 13% 9%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 142 76% 36%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 220 13% 15%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 220 13% 20%;
+    --sidebar-ring: 142 76% 36%;
   }
 }
 
@@ -143,12 +74,12 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground font-space;
+    @apply bg-background text-foreground font-space antialiased;
   }
   
-  /* Neo Brutalist Typography */
+  /* Clean Typography */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-space font-bold;
+    @apply font-space font-bold tracking-tight;
   }
   
   .font-display {
@@ -160,10 +91,14 @@ All colors MUST be HSL.
   }
 }
 
-/* Neo Brutalist Utility Classes */
+/* Clean Neo Brutalist Components */
 @layer components {
   .brutal-border {
-    @apply border-4 border-primary;
+    @apply border-2 border-border;
+  }
+  
+  .brutal-border-accent {
+    @apply border-2 border-accent;
   }
   
   .brutal-shadow {
@@ -178,30 +113,42 @@ All colors MUST be HSL.
     box-shadow: var(--shadow-brutal-sm);
   }
   
-  .brutal-shadow-color {
-    box-shadow: var(--shadow-brutal-color);
+  .brutal-shadow-accent {
+    box-shadow: var(--shadow-accent);
   }
   
-  .brutal-shadow-neon {
-    box-shadow: var(--shadow-brutal-neon);
+  .brutal-shadow-bitcoin {
+    box-shadow: var(--shadow-bitcoin);
   }
   
   .brutal-card {
-    @apply brutal-border brutal-shadow bg-card;
+    @apply brutal-border bg-card brutal-shadow rounded-md;
+  }
+  
+  .brutal-card-accent {
+    @apply brutal-border-accent bg-card brutal-shadow-accent rounded-md;
   }
   
   .brutal-button {
-    @apply brutal-border brutal-shadow font-bold uppercase tracking-wider;
-    transition: all 0.1s ease;
+    @apply brutal-border brutal-shadow font-semibold tracking-wide rounded-md;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .brutal-button:hover {
     @apply brutal-shadow-hover;
-    transform: translate(-4px, -4px);
+    transform: translate(-2px, -2px);
   }
   
   .brutal-button:active {
     @apply brutal-shadow-sm;
-    transform: translate(2px, 2px);
+    transform: translate(1px, 1px);
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent;
+  }
+
+  .gradient-text-bitcoin {
+    @apply bg-gradient-to-r from-bitcoin to-warning bg-clip-text text-transparent;
   }
 }

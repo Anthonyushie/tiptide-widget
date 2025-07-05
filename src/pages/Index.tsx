@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import heroImage from '@/assets/tiptide-hero.jpg';
 
 const Index = () => {
   const [postId, setPostId] = useState('note1example123456789abcdef');
@@ -38,21 +37,17 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <div className="relative overflow-hidden bg-gradient-brutal">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
-          style={{ backgroundImage: `url(${heroImage})` }}
-        />
-        <div className="relative container mx-auto px-6 py-24 text-center">
-          <h1 className="text-8xl font-bold mb-8 text-foreground font-space uppercase tracking-wider">
-            TIPTIDE
+      <div className="relative overflow-hidden bg-gradient-subtle">
+        <div className="container mx-auto px-6 py-24 text-center">
+          <h1 className="text-8xl font-bold mb-8 gradient-text-bitcoin font-space">
+            Tiptide
           </h1>
-          <div className="brutal-border bg-gradient-bitcoin text-primary-foreground p-6 brutal-shadow-color mx-auto max-w-3xl">
-            <p className="text-3xl font-bold uppercase tracking-wide mb-4 font-space">
-              NEO BRUTALIST PAYMENT WIDGET
+          <div className="brutal-card-accent p-8 mx-auto max-w-3xl">
+            <p className="text-3xl font-bold mb-4 font-space">
+              Clean Neo Brutalist Payment Widget
             </p>
-            <p className="text-xl font-jetbrains uppercase tracking-wider">
-              UNLEASH THE PSYCHOLOGY OF SOCIAL PROOF • LIGHTNING NETWORK TIPS • NOSTR PROTOCOL
+            <p className="text-xl font-jetbrains text-muted-foreground">
+              Social proof psychology • Lightning Network tips • Nostr protocol
             </p>
           </div>
         </div>
@@ -64,10 +59,10 @@ const Index = () => {
         <div className="grid gap-12 lg:grid-cols-2">
           {/* Widget Demo */}
           <div className="space-y-8">
-            <Card className="brutal-card">
+            <Card>
               <CardHeader>
                 <CardTitle className="text-foreground">
-                  LIVE WIDGET DEMO
+                  Live Widget Demo
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -88,11 +83,11 @@ const Index = () => {
                 onClick={() => setCompactMode(!compactMode)}
                 className="font-jetbrains"
               >
-                {compactMode ? 'FULL MODE' : 'COMPACT MODE'}
+                {compactMode ? 'Full Mode' : 'Compact Mode'}
               </Button>
-              <div className="brutal-border bg-card p-3 brutal-shadow-sm">
-                <span className="text-sm font-bold uppercase tracking-wider text-muted-foreground font-jetbrains">
-                  TOGGLE WIDGET SIZE
+              <div className="brutal-border bg-card p-3 brutal-shadow-sm rounded-md">
+                <span className="text-sm font-semibold text-muted-foreground font-jetbrains">
+                  Toggle widget size
                 </span>
               </div>
             </div>
@@ -100,9 +95,9 @@ const Index = () => {
 
           {/* Controls */}
           <div className="space-y-8">
-            <Card className="brutal-card">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-foreground">TRY DIFFERENT POSTS</CardTitle>
+                <CardTitle className="text-foreground">Try Different Posts</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 {examplePosts.map((post) => (
@@ -113,8 +108,8 @@ const Index = () => {
                     onClick={() => setPostId(post.id)}
                   >
                     <div>
-                      <div className="font-bold text-lg uppercase tracking-wide">{post.title}</div>
-                      <div className="text-sm text-muted-foreground font-normal mt-1 uppercase tracking-wider">
+                      <div className="font-bold text-lg">{post.title}</div>
+                      <div className="text-sm text-muted-foreground font-normal mt-1">
                         {post.description}
                       </div>
                     </div>
@@ -123,29 +118,29 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="brutal-card">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-foreground">CUSTOM POST ID</CardTitle>
+                <CardTitle className="text-foreground">Custom Post ID</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <Label htmlFor="custom-post" className="font-bold uppercase tracking-wider font-jetbrains">
-                  ENTER NOSTR POST ID
+                <Label htmlFor="custom-post" className="font-semibold font-jetbrains">
+                  Enter Nostr Post ID
                 </Label>
                 <div className="flex space-x-3">
                   <Input
                     id="custom-post"
-                    placeholder="ENTER NOSTR POST ID..."
+                    placeholder="Enter Nostr post ID..."
                     value={customPostId}
                     onChange={(e) => setCustomPostId(e.target.value)}
                     className="brutal-border font-jetbrains"
                   />
                   <Button variant="bitcoin" onClick={handleCustomPostId} className="font-jetbrains">
-                    LOAD
+                    Load
                   </Button>
                 </div>
-                <div className="brutal-border bg-muted/20 p-3 brutal-shadow-sm">
-                  <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground font-jetbrains">
-                    ENTER ANY NOSTR NOTE ID TO SEE REAL PAYMENT DATA
+                <div className="brutal-border bg-muted/20 p-3 brutal-shadow-sm rounded-md">
+                  <p className="text-xs font-semibold text-muted-foreground font-jetbrains">
+                    Enter any Nostr note ID to see real payment data
                   </p>
                 </div>
               </CardContent>
@@ -155,64 +150,64 @@ const Index = () => {
 
         {/* Feature Highlights */}
         <div className="mt-20 grid gap-8 md:grid-cols-3">
-          <Card className="brutal-card bg-gradient-bitcoin/20 text-center">
+          <Card className="bg-accent/10 text-center">
             <CardContent className="p-8">
               <div className="text-6xl mb-6">⚡</div>
-              <CardTitle className="mb-4 text-foreground">REAL-TIME UPDATES</CardTitle>
-              <p className="text-sm text-muted-foreground font-jetbrains uppercase tracking-wider">
-                LIVE LIGHTNING NETWORK PAYMENT TRACKING VIA NOSTR RELAYS
+              <CardTitle className="mb-4 text-foreground">Real-time Updates</CardTitle>
+              <p className="text-sm text-muted-foreground font-jetbrains">
+                Live Lightning Network payment tracking via Nostr relays
               </p>
             </CardContent>
           </Card>
           
-          <Card className="brutal-card bg-gradient-neon/20 text-center">
+          <Card className="bg-bitcoin/10 text-center">
             <CardContent className="p-8">
               <div className="text-6xl mb-6">🔥</div>
-              <CardTitle className="mb-4 text-foreground">SOCIAL PROOF</CardTitle>
-              <p className="text-sm text-muted-foreground font-jetbrains uppercase tracking-wider">
-                PSYCHOLOGY-DRIVEN MESSAGING TO ENCOURAGE MORE TIPS
+              <CardTitle className="mb-4 text-foreground">Social Proof</CardTitle>
+              <p className="text-sm text-muted-foreground font-jetbrains">
+                Psychology-driven messaging to encourage more tips
               </p>
             </CardContent>
           </Card>
           
-          <Card className="brutal-card bg-cyber-blue/20 text-center">
+          <Card className="bg-info/10 text-center">
             <CardContent className="p-8">
               <div className="text-6xl mb-6">📱</div>
-              <CardTitle className="mb-4 text-foreground">EMBEDDABLE</CardTitle>
-              <p className="text-sm text-muted-foreground font-jetbrains uppercase tracking-wider">
-                RESPONSIVE WIDGET FOR SOCIAL MEDIA AND BLOG POSTS
+              <CardTitle className="mb-4 text-foreground">Embeddable</CardTitle>
+              <p className="text-sm text-muted-foreground font-jetbrains">
+                Responsive widget for social media and blog posts
               </p>
             </CardContent>
           </Card>
         </div>
 
         {/* Technical Details */}
-        <Card className="mt-20 brutal-card bg-muted/10">
+        <Card className="mt-20 bg-muted/10">
           <CardHeader>
-            <CardTitle className="text-foreground">HOW IT WORKS</CardTitle>
+            <CardTitle className="text-foreground">How It Works</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid gap-8 md:grid-cols-2">
-              <div className="brutal-border bg-bitcoin/10 p-6 brutal-shadow-color">
-                <h4 className="font-bold mb-4 text-bitcoin text-xl uppercase tracking-wider font-space">
-                  NOSTR INTEGRATION
+              <div className="brutal-border bg-bitcoin/10 p-6 brutal-shadow-bitcoin rounded-md">
+                <h4 className="font-bold mb-4 text-bitcoin text-xl font-space">
+                  Nostr Integration
                 </h4>
-                <ul className="space-y-2 font-jetbrains text-sm uppercase tracking-wider">
-                  <li className="text-muted-foreground">• CONNECTS TO MULTIPLE NOSTR RELAYS</li>
-                  <li className="text-muted-foreground">• SUBSCRIBES TO ZAP RECEIPT EVENTS (KIND 9735)</li>
-                  <li className="text-muted-foreground">• PARSES LIGHTNING NETWORK PAYMENT DATA</li>
-                  <li className="text-muted-foreground">• REAL-TIME WEBSOCKET CONNECTIONS</li>
+                <ul className="space-y-2 font-jetbrains text-sm">
+                  <li className="text-muted-foreground">• Connects to multiple Nostr relays</li>
+                  <li className="text-muted-foreground">• Subscribes to zap receipt events (kind 9735)</li>
+                  <li className="text-muted-foreground">• Parses Lightning Network payment data</li>
+                  <li className="text-muted-foreground">• Real-time WebSocket connections</li>
                 </ul>
               </div>
-              <div className="brutal-border bg-brutal-purple/10 p-6 brutal-shadow-neon">
-                <h4 className="font-bold mb-4 text-brutal-purple text-xl uppercase tracking-wider font-space">
-                  SOCIAL PSYCHOLOGY
+              <div className="brutal-border bg-accent/10 p-6 brutal-shadow-accent rounded-md">
+                <h4 className="font-bold mb-4 text-accent text-xl font-space">
+                  Social Psychology
                 </h4>
-                <ul className="space-y-2 font-jetbrains text-sm uppercase tracking-wider">
-                  <li className="text-muted-foreground">• DYNAMIC SOCIAL PROOF MESSAGING</li>
-                  <li className="text-muted-foreground">• ACTIVITY-BASED ENGAGEMENT PROMPTS</li>
-                  <li className="text-muted-foreground">• REAL-TIME PAYMENT NOTIFICATIONS</li>
-                  <li className="text-muted-foreground">• TRENDING CONTENT INDICATORS</li>
+                <ul className="space-y-2 font-jetbrains text-sm">
+                  <li className="text-muted-foreground">• Dynamic social proof messaging</li>
+                  <li className="text-muted-foreground">• Activity-based engagement prompts</li>
+                  <li className="text-muted-foreground">• Real-time payment notifications</li>
+                  <li className="text-muted-foreground">• Trending content indicators</li>
                 </ul>
               </div>
             </div>
@@ -221,13 +216,13 @@ const Index = () => {
 
         {/* Footer */}
         <div className="mt-20 text-center space-y-6">
-          <Card className="brutal-card bg-gradient-brutal text-primary-foreground">
+          <Card className="bg-gradient-subtle">
             <CardContent className="p-8">
-              <p className="text-lg font-bold uppercase tracking-wider font-space mb-2">
-                BUILT WITH NOSTR, LIGHTNING NETWORK, AND MODERN WEB TECHNOLOGIES
+              <p className="text-lg font-bold font-space mb-2">
+                Built with Nostr, Lightning Network, and modern web technologies
               </p>
-              <p className="font-jetbrains uppercase tracking-widest text-sm">
-                OPEN SOURCE • PRIVACY FOCUSED • DECENTRALIZED
+              <p className="font-jetbrains text-sm text-muted-foreground">
+                Open source • Privacy focused • Decentralized
               </p>
             </CardContent>
           </Card>

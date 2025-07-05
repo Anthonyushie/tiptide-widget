@@ -19,17 +19,17 @@ const DEMO_PAYMENTS: PaymentData[] = [
   {
     amount: 21000, // 21 sats in millisats
     timestamp: Date.now() - 5 * 60 * 1000, // 5 minutes ago
-    message: "BRUTAL CONTENT! ⚡"
+    message: "Great content! ⚡"
   },
   {
     amount: 100000, // 100 sats
     timestamp: Date.now() - 15 * 60 * 1000, // 15 minutes ago
-    message: "THIS HITS DIFFERENT"
+    message: "This is valuable"
   },
   {
     amount: 5000, // 5 sats
     timestamp: Date.now() - 30 * 60 * 1000, // 30 minutes ago
-    message: "SMALL BUT MIGHTY 🙏"
+    message: "Small but mighty 🙏"
   },
   {
     amount: 50000, // 50 sats
@@ -38,7 +38,7 @@ const DEMO_PAYMENTS: PaymentData[] = [
   {
     amount: 210000, // 210 sats
     timestamp: Date.now() - 6 * 60 * 60 * 1000, // 6 hours ago
-    message: "EXCELLENT WORK!"
+    message: "Excellent work!"
   }
 ];
 
@@ -75,7 +75,7 @@ export function TiptideWidget({
 
   const handleTipClick = () => {
     toast({
-      title: "READY TO TIP! ⚡",
+      title: "Ready to tip! ⚡",
       description: "Lightning payments integration coming soon. This demo shows real Nostr payment data.",
     });
   };
@@ -83,14 +83,14 @@ export function TiptideWidget({
   const toggleDemo = () => {
     setShowDemo(!showDemo);
     toast({
-      title: showDemo ? "LIVE MODE ACTIVATED" : "DEMO MODE ACTIVATED",
+      title: showDemo ? "Live mode activated" : "Demo mode activated",
       description: showDemo ? "Connecting to Nostr relays..." : "Showing demo payment data",
     });
   };
 
   if (compactMode) {
     return (
-      <Card className={`brutal-card bg-card/90 backdrop-blur-sm ${className}`}>
+      <Card className={`bg-card/95 backdrop-blur-sm ${className}`}>
         <CardContent className="p-4">
           <div className="flex items-center justify-between space-x-4">
             <PaymentStatsDisplay stats={displayStats} loading={loading && !showDemo} compact />
@@ -100,13 +100,13 @@ export function TiptideWidget({
               onClick={handleTipClick}
               className="font-jetbrains"
             >
-              TIP ⚡
+              Tip ⚡
             </Button>
           </div>
           {!isConnected && !showDemo && (
             <div className="mt-3 text-center">
-              <Badge variant="outline" className="brutal-border bg-cyber-blue/20 text-foreground font-jetbrains font-bold">
-                CONNECTING TO NOSTR...
+              <Badge variant="outline" className="font-jetbrains font-semibold">
+                Connecting to Nostr...
               </Badge>
             </div>
           )}
@@ -116,22 +116,19 @@ export function TiptideWidget({
   }
 
   return (
-    <Card className={`brutal-card bg-card/95 backdrop-blur-sm ${className}`}>
+    <Card className={`bg-card/95 backdrop-blur-sm ${className}`}>
       <CardHeader className="space-y-0 pb-4">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <CardTitle className="bg-gradient-bitcoin bg-clip-text text-transparent font-space">
-              TIPTIDE
+            <CardTitle className="gradient-text-bitcoin font-space text-2xl">
+              Tiptide
             </CardTitle>
             <Badge 
-              className={`brutal-border font-jetbrains font-bold uppercase tracking-widest ${
-                isConnected 
-                  ? 'bg-neon-green text-primary-foreground brutal-shadow-color' 
-                  : 'bg-cyber-blue/30 text-foreground brutal-shadow'
-              }`}
+              variant={isConnected ? 'success' : 'outline'}
+              className="font-jetbrains font-semibold"
             >
-              {isConnected ? '⚡ LIVE' : '🔄 CONNECTING'}
+              {isConnected ? '⚡ Live' : '🔄 Connecting'}
             </Badge>
           </div>
           
@@ -141,7 +138,7 @@ export function TiptideWidget({
             onClick={toggleDemo}
             className="font-jetbrains"
           >
-            {showDemo ? 'LIVE' : 'DEMO'}
+            {showDemo ? 'Live' : 'Demo'}
           </Button>
         </div>
       </CardHeader>
@@ -150,20 +147,20 @@ export function TiptideWidget({
         {/* Loading State */}
         {loading && !showDemo && (
           <div className="py-12 text-center">
-            <LoadingSpinner size="lg" message="CONNECTING TO NOSTR RELAYS..." />
+            <LoadingSpinner size="lg" message="Connecting to Nostr relays..." />
           </div>
         )}
 
         {/* Error State */}
         {error && !showDemo && (
           <div className="text-center py-8 space-y-4">
-            <div className="brutal-border bg-destructive/20 p-4 brutal-shadow">
-              <div className="text-lg font-bold uppercase tracking-wider text-foreground font-jetbrains">
-                ⚠️ {error.toUpperCase()}
+            <div className="brutal-border bg-destructive/20 p-4 brutal-shadow rounded-md">
+              <div className="text-lg font-semibold text-foreground font-jetbrains">
+                ⚠️ {error}
               </div>
             </div>
             <Button variant="outline" onClick={reconnect} className="font-jetbrains">
-              RETRY CONNECTION
+              Retry Connection
             </Button>
           </div>
         )}
@@ -177,7 +174,7 @@ export function TiptideWidget({
             </div>
 
             {/* Payment Stats */}
-            <div className="brutal-border bg-muted/20 p-6 brutal-shadow">
+            <div className="brutal-border bg-muted/20 p-6 brutal-shadow rounded-md">
               <PaymentStatsDisplay stats={displayStats} loading={loading && !showDemo} />
             </div>
 
@@ -192,20 +189,20 @@ export function TiptideWidget({
             {/* Action Button */}
             <div className="flex justify-center pt-4">
               <Button 
-                variant="neon"
+                variant="accent"
                 size="lg"
                 onClick={handleTipClick}
-                className="font-jetbrains text-xl"
+                className="font-jetbrains text-lg animate-pulse-glow"
               >
-                {displayStats.totalCount > 0 ? 'JOIN THE TIP FRENZY! ⚡' : 'BREAK THE SILENCE! ⚡'}
+                {displayStats.totalCount > 0 ? 'Join the tip frenzy! ⚡' : 'Break the silence! ⚡'}
               </Button>
             </div>
 
             {/* Connection Status */}
             {!showDemo && (
-              <div className="text-center brutal-border bg-card/50 p-3 brutal-shadow-sm">
-                <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground font-jetbrains">
-                  CONNECTED TO {connections.filter(c => c.connected).length}/{connections.length} RELAYS
+              <div className="text-center brutal-border bg-card/50 p-3 brutal-shadow-sm rounded-md">
+                <div className="text-xs font-semibold text-muted-foreground font-jetbrains">
+                  Connected to {connections.filter(c => c.connected).length}/{connections.length} relays
                 </div>
               </div>
             )}

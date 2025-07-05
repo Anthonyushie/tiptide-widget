@@ -11,17 +11,17 @@ export function PaymentStatsDisplay({ stats, loading, compact = false }: Payment
   if (loading) {
     return (
       <div className="flex items-center space-x-4">
-        <div className="h-8 w-20 bg-muted brutal-border brutal-shadow animate-pulse" />
-        <div className="h-8 w-24 bg-muted brutal-border brutal-shadow animate-pulse" />
+        <div className="h-8 w-20 bg-muted brutal-border brutal-shadow animate-pulse rounded-md" />
+        <div className="h-8 w-24 bg-muted brutal-border brutal-shadow animate-pulse rounded-md" />
       </div>
     );
   }
 
   if (stats.totalCount === 0) {
     return (
-      <div className="text-center p-4 brutal-border bg-neon-green/10 brutal-shadow">
-        <div className="text-lg font-bold uppercase tracking-wider text-foreground">
-          NO TIPS YET - BREAK THE ICE! ⚡
+      <div className="text-center p-4 brutal-border bg-accent/10 brutal-shadow-accent rounded-md">
+        <div className="text-lg font-bold text-foreground">
+          No tips yet - break the ice! ⚡
         </div>
       </div>
     );
@@ -38,21 +38,21 @@ export function PaymentStatsDisplay({ stats, loading, compact = false }: Payment
 
   if (compact) {
     return (
-      <div className="flex items-center space-x-6 font-jetbrains font-bold">
+      <div className="flex items-center space-x-6 font-jetbrains font-semibold">
         <div className="text-center">
-          <div className="text-2xl font-bold text-bitcoin animate-counter-brutal brutal-shadow-color bg-card px-3 py-1">
+          <div className="text-2xl font-bold text-accent animate-fade-in bg-card px-3 py-1 rounded-md brutal-shadow-sm">
             {stats.totalCount}
           </div>
-          <div className="text-xs uppercase tracking-wider text-muted-foreground mt-1">
-            {stats.totalCount === 1 ? 'TIP' : 'TIPS'}
+          <div className="text-xs text-muted-foreground mt-1">
+            {stats.totalCount === 1 ? 'Tip' : 'Tips'}
           </div>
         </div>
         <div className="text-center">
-          <div className="text-2xl font-bold text-lightning animate-counter-brutal brutal-shadow-color bg-card px-3 py-1">
+          <div className="text-2xl font-bold text-bitcoin animate-fade-in bg-card px-3 py-1 rounded-md brutal-shadow-sm">
             {formatAmount(stats.totalAmount)}
           </div>
-          <div className="text-xs uppercase tracking-wider text-muted-foreground mt-1">
-            SATS
+          <div className="text-xs text-muted-foreground mt-1">
+            Sats
           </div>
         </div>
       </div>
@@ -62,45 +62,45 @@ export function PaymentStatsDisplay({ stats, loading, compact = false }: Payment
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-3 gap-6">
-        <div className="text-center brutal-card bg-card p-4">
-          <div className="text-4xl font-bold text-bitcoin animate-counter-brutal font-jetbrains">
+        <div className="text-center brutal-card-accent p-4">
+          <div className="text-4xl font-bold text-accent animate-fade-in font-jetbrains">
             {stats.totalCount}
           </div>
-          <div className="text-sm uppercase tracking-widest text-muted-foreground font-bold mt-2">
-            {stats.totalCount === 1 ? 'PERSON' : 'PEOPLE'}
+          <div className="text-sm text-muted-foreground font-semibold mt-2">
+            {stats.totalCount === 1 ? 'Person' : 'People'}
           </div>
         </div>
         
-        <div className="text-center brutal-card bg-secondary/10 p-4">
-          <div className="text-4xl font-bold text-lightning animate-counter-brutal font-jetbrains">
+        <div className="text-center brutal-card p-4">
+          <div className="text-4xl font-bold text-bitcoin animate-fade-in font-jetbrains">
             {formatAmount(stats.totalAmount)}
           </div>
-          <div className="text-sm uppercase tracking-widest text-muted-foreground font-bold mt-2">
-            TOTAL SATS
+          <div className="text-sm text-muted-foreground font-semibold mt-2">
+            Total Sats
           </div>
         </div>
         
-        <div className="text-center brutal-card bg-brutal-purple/10 p-4">
-          <div className="text-4xl font-bold text-brutal-purple animate-counter-brutal font-jetbrains">
+        <div className="text-center brutal-card p-4">
+          <div className="text-4xl font-bold text-success animate-fade-in font-jetbrains">
             {formatAmount(stats.averageAmount)}
           </div>
-          <div className="text-sm uppercase tracking-widest text-muted-foreground font-bold mt-2">
-            AVG TIP
+          <div className="text-sm text-muted-foreground font-semibold mt-2">
+            Avg Tip
           </div>
         </div>
       </div>
       
       {stats.recentCount > 0 && (
-        <div className="text-center p-4 brutal-border bg-neon-green/20 brutal-shadow-color">
-          <div className="text-lg font-bold uppercase tracking-wider text-foreground animate-brutal-bounce">
-            🔥 {stats.recentCount} TIP{stats.recentCount === 1 ? '' : 'S'} IN LAST HOUR 🔥
+        <div className="text-center p-4 brutal-border bg-accent/20 brutal-shadow-accent rounded-md">
+          <div className="text-lg font-bold text-foreground animate-subtle-bounce">
+            🔥 {stats.recentCount} tip{stats.recentCount === 1 ? '' : 's'} in last hour 🔥
           </div>
         </div>
       )}
       
       {stats.lastPaymentTime && (
-        <div className="text-center text-sm font-jetbrains text-muted-foreground uppercase tracking-wider">
-          LAST TIP: {formatDistanceToNow(new Date(stats.lastPaymentTime), { addSuffix: true }).toUpperCase()}
+        <div className="text-center text-sm font-jetbrains text-muted-foreground">
+          Last tip: {formatDistanceToNow(new Date(stats.lastPaymentTime), { addSuffix: true })}
         </div>
       )}
     </div>
