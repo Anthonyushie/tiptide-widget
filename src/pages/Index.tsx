@@ -14,6 +14,11 @@ const Index = () => {
 
   const examplePosts = [
     {
+      id: 'demo-mode',
+      title: '🎭 Demo Mode',
+      description: 'See the widget with simulated zap data'
+    },
+    {
       id: 'note1a0tfjua3mdk3e5u2cd709nu9qszhzj8a2mnwp9xwyk2dymzujtmq56vcvv',
       title: 'Derek Ross - 1 Million Zaps',
       description: 'Popular post about reaching 1M zaps milestone'
@@ -133,7 +138,7 @@ const Index = () => {
               </CardHeader>
               <CardContent>
                 <TiptideWidget
-                  postId={postId}
+                  postId={postId === 'demo-mode' ? 'demo-post-id' : postId}
                   relays={[
                     'wss://relay.damus.io',
                     'wss://relay.primal.net',
@@ -156,7 +161,7 @@ const Index = () => {
                     'wss://relay.nostrati.com',
                     'wss://relay.bitcoiner.social'
                   ]}
-                  demoMode={false} // Start in live mode by default
+                  demoMode={postId === 'demo-mode'}
                   showRealtimeActivity={true}
                   compactMode={compactMode}
                 />
