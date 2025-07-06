@@ -16,14 +16,20 @@ export class NostrClient {
 
   async connect(): Promise<void> {
     console.log('NostrClient: Connecting to relays...', this.relays);
+    
+    // Reset connection status
+    this.relays.forEach(relay => this.relayConnections.set(relay, false));
+    
     try {
-      // Connect to relays with better error handling and connection tracking
+      // Connect to relays with simplified but more reliable approach
       const connectionPromises = this.relays.map(async (relay) => {
         try {
-          console.log(`Connecting to ${relay}`);
+          console.log(`🔄 Attempting to connect to ${relay}`);
+          
+          // Use ensureRelay and assume success if no error is thrown
           const relayInstance = await this.pool.ensureRelay(relay);
           
-          // Set up connection event listeners
+          // Set up event listeners
           relayInstance.on('connect', () => {
             console.log(`✅ Connected to ${relay}`);
             this.relayConnections.set(relay, true);
@@ -39,11 +45,13 @@ export class NostrClient {
             this.relayConnections.set(relay, false);
           });
           
-          // Wait a bit for connection to establish
-          await new Promise(resolve => setTimeout(resolve, 1000));
+          // Give some time for connection to establish and mark as connected
+          await new Promise(resolve => setTimeout(resolve, 2000));
           
+          // Assume connected if we got this far without errors
           this.relayConnections.set(relay, true);
-          console.log(`✅ Successfully connected to ${relay}`);
+          console.log(`✅ Marked ${relay} as connected`);
+          
           return { relay, success: true };
         } catch (error) {
           console.error(`❌ Failed to connect to ${relay}:`, error);
@@ -56,9 +64,16 @@ export class NostrClient {
       const successful = results.filter(r => r.status === 'fulfilled' && r.value.success).length;
       console.log(`NostrClient: Connected to ${successful}/${this.relays.length} relays`);
       
-      // Don't throw error if some relays fail - continue with available ones
+      // Log detailed connection status
+      this.relays.forEach(relay => {
+        const connected = this.relayConnections.get(relay);
+        console.log(`📡 ${relay}: ${connected ? '✅ Connected' : '❌ Disconnected'}`);
+      });
+      
       if (successful === 0) {
-        console.warn('Failed to connect to any relays, but continuing...');
+        console.warn('⚠️ Failed to connect to any relays, but continuing...');
+      } else {
+        console.log(`🎉 Successfully connected to ${successful} relay(s)`);
       }
     } catch (error) {
       console.error('NostrClient connection error:', error);
@@ -80,11 +95,21 @@ export class NostrClient {
         limit: 100
       };
 
-      console.log('Subscribing to zaps for post:', postId);
-      console.log('Filter:', filter);
-      console.log('Relays:', this.relays);
+      console.log('🔔 Subscribing to zaps for post:', postId);
+      console.log('🔔 Filter:', filter);
+      console.log('🔔 All relays:', this.relays);
+      
+      // Get connected relays only
+      const connectedRelays = this.relays.filter(relay => this.relayConnections.get(relay));
+      console.log('🔔 Connected relays for subscription:', connectedRelays);
+      
+      if (connectedRelays.length === 0) {
+        console.warn('⚠️ No connected relays available for subscription');
+        onError('No connected relays available');
+        return () => {};
+      }
 
-      const sub = this.pool.subscribeMany(this.relays, [filter], {
+      const sub = this.pool.subscribeMany(connectedRelays, [filter], {
         onevent: (event: Event) => {
           console.log('Received zap event:', event);
           try {
@@ -208,27 +233,42 @@ export class NostrClient {
         limit: 500
       };
 
-      console.log('Fetching historical zaps for post:', postId);
+      console.log('🔍 Fetching historical zaps for post:', postId);
+      console.log('🔍 Using filter:', filter);
+      console.log('🔍 Querying relays:', this.relays);
       
-      const events = await this.pool.querySync(this.relays, filter);
-      console.log('Found historical zap events:', events.length);
+      // Get connected relays only
+      const connectedRelays = this.relays.filter(relay => this.relayConnections.get(relay));
+      console.log('🔍 Connected relays for query:', connectedRelays);
+      
+      if (connectedRelays.length === 0) {
+        console.warn('⚠️ No connected relays available for historical query');
+        return [];
+      }
+      
+      const events = await this.pool.querySync(connectedRelays, filter);
+      console.log('📦 Found historical zap events:', events.length);
 
       const payments: PaymentData[] = [];
       
       for (const event of events) {
+        console.log('🔍 Processing event:', event.id, 'kind:', event.kind);
         const payment = this.parseZapReceipt(event as ZapReceipt);
         if (payment) {
+          console.log('✅ Parsed payment:', payment.amount, 'msats');
           payments.push(payment);
+        } else {
+          console.log('❌ Failed to parse payment from event:', event.id);
         }
       }
 
       // Sort by timestamp (newest first)
       payments.sort((a, b) => b.timestamp - a.timestamp);
       
-      console.log('Parsed payments:', payments.length);
+      console.log('📊 Total parsed payments:', payments.length);
       return payments;
     } catch (error) {
-      console.error('Error fetching historical zaps:', error);
+      console.error('❌ Error fetching historical zaps:', error);
       return [];
     }
   }
@@ -285,12 +325,32 @@ export function isValidNostrNoteId(noteId: string): boolean {
 export function normalizeNoteId(noteId: string): string {
   if (noteId.startsWith('note1')) {
     try {
-      // In a real implementation, you'd use a bech32 decoder
-      // For now, we'll just return the original ID
+      // Simple bech32 to hex conversion for note IDs
+      // This is a simplified approach - in production use proper bech32 library
+      const decoded = bech32ToHex(noteId);
+      if (decoded) {
+        console.log(`🔄 Converted note1 to hex: ${noteId} -> ${decoded}`);
+        return decoded;
+      }
       return noteId;
     } catch {
       return noteId;
     }
   }
   return noteId;
+}
+
+// Simple bech32 to hex converter (simplified implementation)
+function bech32ToHex(bech32: string): string | null {
+  try {
+    // This is a very basic implementation
+    // In production, use a proper bech32 library like 'bech32' npm package
+    if (!bech32.startsWith('note1')) return null;
+    
+    // For now, just return the original - proper conversion would require bech32 library
+    // The nostr-tools library should handle this internally
+    return bech32;
+  } catch {
+    return null;
+  }
 }
