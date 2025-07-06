@@ -136,24 +136,20 @@ const Index = () => {
                   postId={postId}
                   relays={[
                     'wss://relay.damus.io',
-                    'wss://nos.lol', 
-                    'wss://relay.snort.social',
-                    'wss://relay.nostr.band',
                     'wss://relay.primal.net',
+                    'wss://relay.snort.social',
                     'wss://relay.yakihonne.com',
+                    'wss://nos.lol',
+                    'wss://relay.nostr.band',
                     'wss://purplepag.es',
-                    'wss://relay.mostr.pub',
-                    'wss://relay.current.fyi',
                     'wss://nostr.wine',
+                    'wss://relay.current.fyi',
+                    'wss://relay.mostr.pub',
                     'wss://relay.nostrgraph.net',
                     'wss://nostr.oxtr.dev',
                     'wss://relay.nostrich.de',
-                    'wss://nostr-pub.wellorder.net',
-                    'wss://relay.orangepill.dev',
-                    'wss://brb.io',
                     'wss://offchain.pub',
-                    'wss://relay.nostr.info',
-                    'wss://nostr.fmt.wiz.biz'
+                    'wss://relay.nostr.info'
                   ]}
                   demoMode={false} // Start in live mode by default
                   showRealtimeActivity={true}

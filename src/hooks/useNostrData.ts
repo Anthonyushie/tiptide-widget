@@ -2,26 +2,23 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { PaymentData, AggregatedStats, RelayConnection } from '@/types/nostr';
 import { NostrClient, isValidNostrNoteId, normalizeNoteId } from '@/lib/nostr';
 
+// Prioritized list of reliable Nostr relays
 const DEFAULT_RELAYS = [
   'wss://relay.damus.io',
-  'wss://nos.lol', 
-  'wss://relay.snort.social',
-  'wss://relay.nostr.band',
   'wss://relay.primal.net',
+  'wss://relay.snort.social',
   'wss://relay.yakihonne.com',
+  'wss://nos.lol',
+  'wss://relay.nostr.band',
   'wss://purplepag.es',
-  'wss://relay.mostr.pub',
-  'wss://relay.current.fyi',
   'wss://nostr.wine',
+  'wss://relay.current.fyi',
+  'wss://relay.mostr.pub',
   'wss://relay.nostrgraph.net',
   'wss://nostr.oxtr.dev',
   'wss://relay.nostrich.de',
-  'wss://nostr-pub.wellorder.net',
-  'wss://relay.orangepill.dev',
-  'wss://brb.io',
   'wss://offchain.pub',
-  'wss://relay.nostr.info',
-  'wss://nostr.fmt.wiz.biz'
+  'wss://relay.nostr.info'
 ];
 
 export function useNostrData(postId: string, relays: string[] = DEFAULT_RELAYS) {
