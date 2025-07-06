@@ -216,7 +216,7 @@ export function TiptideWidget({
                       ))}
                     </div>
                   )}
-                  <div className=\"text-xs text-muted-foreground/70 mt-1\">
+                  <div className="text-xs text-muted-foreground/70 mt-1">
                     Including yakihonne.com relay ⚡
                   </div>
                 </div>
