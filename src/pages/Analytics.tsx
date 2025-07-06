@@ -2,7 +2,20 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
-const Analytics = () => {
+interface AnalyticsProps {
+  onBackToWidget?: () => void;
+}
+
+const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
+  const handleBackClick = () => {
+    if (onBackToWidget) {
+      onBackToWidget();
+    } else {
+      // Fallback to history back
+      window.history.back();
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background relative">
       {/* Background Pattern */}
@@ -341,7 +354,7 @@ const Analytics = () => {
             variant="bitcoin" 
             size="lg" 
             className="font-jetbrains text-lg"
-            onClick={() => window.history.back()}
+            onClick={handleBackClick}
           >
             ← Back to Widget Demo
           </Button>

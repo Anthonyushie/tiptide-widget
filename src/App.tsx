@@ -22,14 +22,16 @@ const App = () => {
         <BrowserRouter>
           <div className="min-h-screen bg-background">
             <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
-            <Routes>
-              <Route path="/" element={
-                activeTab === 'widget' ? <Index /> : <Analytics />
-              } />
-              <Route path="/analytics" element={<Analytics />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <div className="pt-20"> {/* Add padding to account for fixed navigation */}
+              <Routes>
+                <Route path="/" element={
+                  activeTab === 'widget' ? <Index /> : <Analytics />
+                } />
+                <Route path="/analytics" element={<Analytics />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </div>
           </div>
         </BrowserRouter>
       </TooltipProvider>
