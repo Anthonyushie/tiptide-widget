@@ -11,8 +11,9 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
     if (onBackToWidget) {
       onBackToWidget();
     } else {
-      // Fallback to history back
-      window.history.back();
+      // Navigate back to widget demo by changing the active tab
+      const event = new CustomEvent('navigateToWidget');
+      window.dispatchEvent(event);
     }
   };
 
@@ -307,43 +308,43 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
         </div>
       </div>
 
-      {/* Coming Soon Overlay */}
-      <div className="fixed inset-0 bg-background/90 backdrop-blur-md z-50 flex items-center justify-center">
-        <div className="text-center space-y-8 max-w-2xl mx-auto px-6">
-          {/* Main Coming Soon Message */}
-          <div className="brutal-card-accent p-12">
-            <div className="text-8xl mb-6 animate-pulse-glow">⚡</div>
-            <h1 className="text-6xl font-bold mb-6 gradient-text-bitcoin font-space">
+      {/* Coming Soon Overlay - Reduced Size */}
+      <div className="fixed inset-0 bg-background/90 backdrop-blur-md z-50 flex items-center justify-center p-6">
+        <div className="text-center space-y-6 max-w-lg mx-auto">
+          {/* Main Coming Soon Message - Smaller */}
+          <div className="brutal-card-accent p-8">
+            <div className="text-6xl mb-4 animate-pulse-glow">⚡</div>
+            <h1 className="text-4xl font-bold mb-4 gradient-text-bitcoin font-space">
               Coming Soon
             </h1>
-            <p className="text-2xl font-jetbrains text-muted-foreground mb-8">
+            <p className="text-lg font-jetbrains text-muted-foreground mb-6">
               Advanced analytics dashboard is under development
             </p>
             
-            {/* Feature Preview */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="brutal-border bg-accent/20 p-4 brutal-shadow-accent rounded-md">
-                <div className="text-3xl mb-2">📊</div>
-                <div className="font-bold font-space text-sm">
+            {/* Feature Preview - Smaller */}
+            <div className="grid grid-cols-3 gap-4 mb-6">
+              <div className="brutal-border bg-accent/20 p-3 brutal-shadow-accent rounded-md">
+                <div className="text-2xl mb-1">📊</div>
+                <div className="font-bold font-space text-xs">
                   Real-time Charts
                 </div>
               </div>
-              <div className="brutal-border bg-bitcoin/20 p-4 brutal-shadow-bitcoin rounded-md">
-                <div className="text-3xl mb-2">🌍</div>
-                <div className="font-bold font-space text-sm">
+              <div className="brutal-border bg-bitcoin/20 p-3 brutal-shadow-bitcoin rounded-md">
+                <div className="text-2xl mb-1">🌍</div>
+                <div className="font-bold font-space text-xs">
                   Global Insights
                 </div>
               </div>
-              <div className="brutal-border bg-success/20 p-4 brutal-shadow-sm rounded-md">
-                <div className="text-3xl mb-2">📈</div>
-                <div className="font-bold font-space text-sm">
+              <div className="brutal-border bg-success/20 p-3 brutal-shadow-sm rounded-md">
+                <div className="text-2xl mb-1">📈</div>
+                <div className="font-bold font-space text-xs">
                   Trend Analysis
                 </div>
               </div>
             </div>
             
-            <div className="brutal-border bg-muted/20 p-6 brutal-shadow-sm rounded-md">
-              <p className="font-jetbrains text-sm text-muted-foreground">
+            <div className="brutal-border bg-muted/20 p-4 brutal-shadow-sm rounded-md">
+              <p className="font-jetbrains text-xs text-muted-foreground">
                 Get notified when analytics goes live • Advanced Nostr data visualization • Lightning Network insights
               </p>
             </div>
@@ -353,7 +354,7 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
           <Button 
             variant="bitcoin" 
             size="lg" 
-            className="font-jetbrains text-lg"
+            className="font-jetbrains text-base px-8"
             onClick={handleBackClick}
           >
             ← Back to Widget Demo
