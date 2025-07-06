@@ -76,33 +76,58 @@ export function useNostrData(postId: string, relays: string[] = DEFAULT_RELAYS) 
 
       const normalizedPostId = normalizeNoteId(postId);
       console.log('Connecting to Nostr for post:', normalizedPostId);
+      console.log('Using relays:', relays);
+
+      // Test a smaller subset of relays first to avoid overwhelming connections
+      const testRelays = relays.slice(0, 5);
+      console.log('Testing with first 5 relays:', testRelays);
 
       // Initialize connection tracking
-      setConnections(relays.map(url => ({ url, connected: false })));
+      setConnections(testRelays.map(url => ({ url, connected: false })));
 
-      // Create Nostr client
-      const client = new NostrClient(relays);
+      // Create Nostr client with subset of relays
+      const client = new NostrClient(testRelays);
       clientRef.current = client;
 
-      // Connect to relays
-      await client.connect();
+      // Connect to relays with timeout
+      console.log('Attempting to connect to relays...');
+      try {
+        await Promise.race([
+          client.connect(),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('Connection timeout')), 10000))
+        ]);
+        console.log('Successfully connected to relays');
+      } catch (connectError) {
+        console.error('Connection failed:', connectError);
+        // Continue anyway - some relays might still work
+      }
 
       // Update connection status
       const relayStatus = client.getRelayStatus();
       setConnections(relayStatus);
 
-      // Check if any relays are connected
+      // Continue even if no relays show as "connected" - the pool might still work
       const connectedRelays = relayStatus.filter(r => r.connected);
-      if (connectedRelays.length === 0) {
-        throw new Error('Failed to connect to any Nostr relays');
-      }
+      console.log(`Relay status: ${connectedRelays.length}/${testRelays.length} relays report as connected`);
+      
+      // Don't throw error immediately - try to fetch data anyway
 
-      console.log(`Connected to ${connectedRelays.length}/${relays.length} relays`);
-
-      // Fetch historical zaps
+      // Fetch historical zaps with timeout
       console.log('Fetching historical zaps...');
-      const historicalPayments = await client.getHistoricalZaps(normalizedPostId);
-      setPayments(historicalPayments);
+      try {
+        const historicalPayments = await Promise.race([
+          client.getHistoricalZaps(normalizedPostId),
+          new Promise<PaymentData[]>((_, reject) => 
+            setTimeout(() => reject(new Error('Historical fetch timeout')), 15000)
+          )
+        ]);
+        console.log('Fetched historical payments:', historicalPayments.length);
+        setPayments(historicalPayments);
+      } catch (fetchError) {
+        console.error('Historical fetch failed:', fetchError);
+        // Continue with empty payments - subscription might still work
+        setPayments([]);
+      }
 
       // Subscribe to new zaps
       console.log('Subscribing to new zaps...');
@@ -129,7 +154,8 @@ export function useNostrData(postId: string, relays: string[] = DEFAULT_RELAYS) 
         },
         (error: string) => {
           console.error('Subscription error:', error);
-          setError(error);
+          // Don't set error state for subscription issues - just log them
+          console.warn('Subscription failed, but continuing...');
         }
       );
 

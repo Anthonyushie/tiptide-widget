@@ -12,10 +12,32 @@ export class NostrClient {
   }
 
   async connect(): Promise<void> {
-    // Ensure relays are connected
-    await Promise.all(
-      this.relays.map(relay => this.pool.ensureRelay(relay))
-    );
+    console.log('NostrClient: Connecting to relays...', this.relays);
+    try {
+      // Connect to relays with better error handling
+      const connectionPromises = this.relays.map(async (relay) => {
+        try {
+          console.log(`Connecting to ${relay}`);
+          await this.pool.ensureRelay(relay);
+          console.log(`Connected to ${relay}`);
+          return { relay, success: true };
+        } catch (error) {
+          console.error(`Failed to connect to ${relay}:`, error);
+          return { relay, success: false, error };
+        }
+      });
+      
+      const results = await Promise.allSettled(connectionPromises);
+      const successful = results.filter(r => r.status === 'fulfilled' && r.value.success).length;
+      console.log(`NostrClient: Connected to ${successful}/${this.relays.length} relays`);
+      
+      if (successful === 0) {
+        throw new Error('Failed to connect to any relays');
+      }
+    } catch (error) {
+      console.error('NostrClient connection error:', error);
+      throw error;
+    }
   }
 
   subscribeToZaps(
