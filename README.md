@@ -59,6 +59,25 @@ This project is built with:
 - React
 - shadcn-ui
 - Tailwind CSS
+- nostr-tools (for Nostr protocol integration)
+
+## Nostr Relay Configuration
+
+This application connects to multiple Nostr relays for real-time Lightning Network zap data:
+
+- **relay.damus.io** - Primary relay
+- **relay.primal.net** - High-performance relay
+- **relay.snort.social** - Social-focused relay
+- **relay.yakihonne.com** - Yakihonne community relay ⚡
+- **nos.lol** - Community relay
+- **relay.nostr.band** - Analytics relay
+- **purplepag.es** - Purple Pages relay
+- **nostr.wine** - Wine relay
+- **relay.current.fyi** - Current relay
+- **relay.mostr.pub** - Mostr bridge relay
+- And many more for maximum coverage and reliability
+
+The app automatically connects to the first 10 available relays for optimal performance and data coverage.
 
 ## How can I deploy this project?
 

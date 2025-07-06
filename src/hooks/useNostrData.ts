@@ -18,7 +18,12 @@ const DEFAULT_RELAYS = [
   'wss://nostr.oxtr.dev',
   'wss://relay.nostrich.de',
   'wss://offchain.pub',
-  'wss://relay.nostr.info'
+  'wss://relay.nostr.info',
+  'wss://relay.nostr.wirednet.jp',
+  'wss://relay.nostr.bg',
+  'wss://nostr.mom',
+  'wss://relay.nostrati.com',
+  'wss://relay.bitcoiner.social'
 ];
 
 export function useNostrData(postId: string, relays: string[] = DEFAULT_RELAYS) {
@@ -95,7 +100,7 @@ export function useNostrData(postId: string, relays: string[] = DEFAULT_RELAYS) 
       try {
         await Promise.race([
           client.connect(),
-          new Promise((_, reject) => setTimeout(() => reject(new Error('Connection timeout')), 15000))
+          new Promise((_, reject) => setTimeout(() => reject(new Error('Connection timeout')), 20000))
         ]);
         console.log('Successfully connected to relays');
       } catch (connectError) {
@@ -119,7 +124,7 @@ export function useNostrData(postId: string, relays: string[] = DEFAULT_RELAYS) 
         const historicalPayments = await Promise.race([
           client.getHistoricalZaps(normalizedPostId),
           new Promise<PaymentData[]>((_, reject) => 
-            setTimeout(() => reject(new Error('Historical fetch timeout')), 20000)
+            setTimeout(() => reject(new Error('Historical fetch timeout')), 25000)
           )
         ]);
         console.log('Fetched historical payments:', historicalPayments.length);
