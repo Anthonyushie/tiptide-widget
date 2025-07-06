@@ -149,7 +149,12 @@ const Index = () => {
                     'wss://nostr.oxtr.dev',
                     'wss://relay.nostrich.de',
                     'wss://offchain.pub',
-                    'wss://relay.nostr.info'
+                    'wss://relay.nostr.info',
+                    'wss://relay.nostr.wirednet.jp',
+                    'wss://relay.nostr.bg',
+                    'wss://nostr.mom',
+                    'wss://relay.nostrati.com',
+                    'wss://relay.bitcoiner.social'
                   ]}
                   demoMode={false} // Start in live mode by default
                   showRealtimeActivity={true}
