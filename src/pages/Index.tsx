@@ -138,7 +138,7 @@ const Index = () => {
               </CardHeader>
               <CardContent>
                 <TiptideWidget
-                  postId={postId}
+                  postId={postId === 'demo-mode' ? 'demo-post-id' : postId}
                   relays={[
                     'wss://relay.damus.io',
                     'wss://relay.primal.net',
@@ -164,7 +164,7 @@ const Index = () => {
                     'wss://relay.nostrati.com',
                     'wss://relay.bitcoiner.social'
                   ]}
-                  demoMode={false} // Start in live mode by default
+                  demoMode={postId === 'demo-mode'}
                   showRealtimeActivity={true}
                   compactMode={compactMode}
                 />
