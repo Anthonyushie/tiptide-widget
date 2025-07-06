@@ -1,4 +1,5 @@
 import { TiptideWidget } from '@/components/TiptideWidget';
+import { Navigation } from '@/components/Navigation';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,6 +9,7 @@ import { isValidNostrNoteId } from '@/lib/nostr';
 import { toast } from '@/hooks/use-toast';
 
 const Index = () => {
+  const [activeTab, setActiveTab] = useState('widget');
   const [postId, setPostId] = useState('note1a0tfjua3mdk3e5u2cd709nu9qszhzj8a2mnwp9xwyk2dymzujtmq56vcvv');
   const [customPostId, setCustomPostId] = useState('');
   const [compactMode, setCompactMode] = useState(false);
@@ -61,8 +63,20 @@ const Index = () => {
     });
   };
 
+  // Only show widget content when widget tab is active
+  if (activeTab !== 'widget') {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
+        {/* Analytics content will be handled by routing */}
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background">
+      <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
+      
       {/* Hero Section */}
       <div className="relative overflow-hidden bg-gradient-subtle">
         {/* Animated Background Pattern */}
