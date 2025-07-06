@@ -68,12 +68,12 @@ This application connects to multiple Nostr relays for real-time Lightning Netwo
 - **relay.damus.io** - Primary relay
 - **relay.primal.net** - High-performance relay
 - **relay.snort.social** - Social-focused relay
-- **relay.yakihonne.com** - Yakihonne community relay ⚡
+- **nostr-01.yakihonne.com** - Yakihonne community relay #1 ⚡
+- **nostr-02.yakihonne.com** - Yakihonne community relay #2 ⚡
 - **nos.lol** - Community relay
 - **relay.nostr.band** - Analytics relay
 - **purplepag.es** - Purple Pages relay
 - **nostr.wine** - Wine relay
-- **relay.current.fyi** - Current relay
 - **relay.mostr.pub** - Mostr bridge relay
 - And many more for maximum coverage and reliability
 

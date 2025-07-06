@@ -217,7 +217,7 @@ export function TiptideWidget({
                     </div>
                   )}
                   <div className="text-xs text-muted-foreground/70 mt-1">
-                    Including yakihonne.com relay ⚡
+                    Including yakihonne.com relays ⚡
                   </div>
                 </div>
               </div>
