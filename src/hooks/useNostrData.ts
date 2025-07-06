@@ -4,9 +4,20 @@ import { NostrClient, isValidNostrNoteId, normalizeNoteId } from '@/lib/nostr';
 
 const DEFAULT_RELAYS = [
   'wss://relay.damus.io',
-  'wss://nos.lol',
+  'wss://nos.lol', 
   'wss://relay.snort.social',
-  'wss://relay.nostr.band'
+  'wss://relay.nostr.band',
+  'wss://relay.primal.net',
+  'wss://purplepag.es',
+  'wss://relay.mostr.pub',
+  'wss://relay.current.fyi',
+  'wss://nostr.wine',
+  'wss://relay.nostrgraph.net',
+  'wss://nostr.oxtr.dev',
+  'wss://relay.nostrich.de',
+  'wss://nostr-pub.wellorder.net',
+  'wss://relay.orangepill.dev',
+  'wss://brb.io'
 ];
 
 export function useNostrData(postId: string, relays: string[] = DEFAULT_RELAYS) {

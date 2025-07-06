@@ -8,30 +8,30 @@ import { isValidNostrNoteId } from '@/lib/nostr';
 import { toast } from '@/hooks/use-toast';
 
 const Index = () => {
-  const [postId, setPostId] = useState('note1example123456789abcdef');
+  const [postId, setPostId] = useState('note1a0tfjua3mdk3e5u2cd709nu9qszhzj8a2mnwp9xwyk2dymzujtmq56vcvv');
   const [customPostId, setCustomPostId] = useState('');
   const [compactMode, setCompactMode] = useState(false);
 
   const examplePosts = [
     {
-      id: 'note1example123456789abcdef',
-      title: 'Example Bitcoin Post',
-      description: 'A popular post about Bitcoin adoption'
+      id: 'note1a0tfjua3mdk3e5u2cd709nu9qszhzj8a2mnwp9xwyk2dymzujtmq56vcvv',
+      title: 'Derek Ross - 1 Million Zaps',
+      description: 'Popular post about reaching 1M zaps milestone'
     },
     {
-      id: 'note1nostr123456789abcdef',
-      title: 'Nostr Protocol Discussion', 
-      description: 'Technical discussion about Nostr development'
+      id: 'note1c34vht0lu2qzrgr4az3u8jn5xl3fycr2gfpahkepthg7hzlqg26sr59amt',
+      title: 'Calle - Nostr Zaps Guide',
+      description: 'Technical guide on how to use Lightning zaps'
     },
     {
-      id: 'note1lightning123456789abc',
-      title: 'Lightning Network Update',
-      description: 'Latest improvements to Lightning Network'
+      id: 'note1f72205grals33mhtt2f7e545fdlk64y3kejp0hpjaxkhldphvnsqfntg9h',
+      title: 'Derek Ross - Zapple Pay',
+      description: 'Announcement about Zapple Pay service'
     },
     {
-      id: 'note1zap123456789abcdefghij',
-      title: 'Real Nostr Note (Live)',
-      description: 'Try with a real Nostr note ID for live data'
+      id: 'note1scags6u8fre3rhyc9h457wdrhu0r2c0h4t0e4d4nrwsjj6mcg2qqc2k7am',
+      title: 'Snowden - Bitcoin on Nostr',
+      description: 'Snowden\'s thoughts on Bitcoin Lightning Network'
     }
   ];
 
@@ -136,9 +136,20 @@ const Index = () => {
                   postId={postId}
                   relays={[
                     'wss://relay.damus.io',
-                    'wss://nos.lol',
+                    'wss://nos.lol', 
                     'wss://relay.snort.social',
-                    'wss://relay.nostr.band'
+                    'wss://relay.nostr.band',
+                    'wss://relay.primal.net',
+                    'wss://purplepag.es',
+                    'wss://relay.mostr.pub',
+                    'wss://relay.current.fyi',
+                    'wss://nostr.wine',
+                    'wss://relay.nostrgraph.net',
+                    'wss://nostr.oxtr.dev',
+                    'wss://relay.nostrich.de',
+                    'wss://nostr-pub.wellorder.net',
+                    'wss://relay.orangepill.dev',
+                    'wss://brb.io'
                   ]}
                   demoMode={false} // Start in live mode by default
                   showRealtimeActivity={true}
