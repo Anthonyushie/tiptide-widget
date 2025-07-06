@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { PaymentData, AggregatedStats, RelayConnection } from '@/types/nostr';
-import { NostrClient, isValidNostrNoteId, normalizeNoteId } from '@/lib/nostr';
+import { NostrClient } from '@/lib/nostr';
+import { nip19 } from 'nostr-tools';
 
 // Prioritized list of reliable Nostr relays
 const DEFAULT_RELAYS = [
@@ -17,9 +18,83 @@ const DEFAULT_RELAYS = [
   'wss://relay.nostrgraph.net',
   'wss://nostr.oxtr.dev',
   'wss://relay.nostrich.de',
+  'wss://nostr-pub.wellorder.net',
+  'wss://relay.yakihonne.com',
+  'wss://relay.orangepill.dev',
+  'wss://brb.io',
   'wss://offchain.pub',
   'wss://relay.nostr.info'
 ];
+
+// Fixed normalization function
+function normalizeNoteId(noteId: string): string {
+  if (!noteId || typeof noteId !== 'string') {
+    throw new Error('Note ID must be a non-empty string');
+  }
+
+  const trimmed = noteId.trim();
+  
+  // If it starts with 'note1', it's bech32 encoded - decode it
+  if (trimmed.startsWith('note1')) {
+    try {
+      const decoded = nip19.decode(trimmed);
+      
+      // Check if it's a note (event) type
+      if (decoded.type !== 'note') {
+        throw new Error(`Expected note type, got ${decoded.type}`);
+      }
+      
+      // Return the hex data
+      const hexId = decoded.data as string;
+      
+      // Validate hex format
+      if (!/^[0-9a-fA-F]{64}$/.test(hexId)) {
+        throw new Error(`Invalid hex format after decoding: ${hexId}`);
+      }
+      
+      return hexId;
+    } catch (error) {
+      throw new Error(`Failed to decode bech32 note ID: ${error.message}`);
+    }
+  }
+  
+  // If it's already hex, validate and return
+  if (/^[0-9a-fA-F]{64}$/.test(trimmed)) {
+    return trimmed;
+  }
+  
+  // If it's hex with odd length, pad with leading zero
+  if (/^[0-9a-fA-F]+$/.test(trimmed)) {
+    const paddedHex = trimmed.length % 2 === 0 ? trimmed : '0' + trimmed;
+    if (paddedHex.length === 64) {
+      return paddedHex;
+    }
+  }
+  
+  throw new Error(`Invalid note ID format: ${trimmed}`);
+}
+
+// Fixed validation function
+function isValidNostrNoteId(noteId: string): boolean {
+  if (!noteId || typeof noteId !== 'string') {
+    return false;
+  }
+
+  const trimmed = noteId.trim();
+  
+  // Check if it's bech32 format
+  if (trimmed.startsWith('note1')) {
+    try {
+      const decoded = nip19.decode(trimmed);
+      return decoded.type === 'note' && typeof decoded.data === 'string';
+    } catch {
+      return false;
+    }
+  }
+  
+  // Check if it's hex format (64 characters)
+  return /^[0-9a-fA-F]{64}$/.test(trimmed);
+}
 
 export function useNostrData(postId: string, relays: string[] = DEFAULT_RELAYS) {
   const [payments, setPayments] = useState<PaymentData[]>([]);
@@ -70,12 +145,45 @@ export function useNostrData(postId: string, relays: string[] = DEFAULT_RELAYS) 
       setLoading(true);
       setError(null);
 
+      // Debug logging
+      console.log('Debug - Original postId:', postId);
+
       // Validate post ID
-      if (!isValidNostrNoteId(postId)) {
-        throw new Error('Invalid Nostr note ID format');
+      if (!postId || typeof postId !== 'string' || postId.trim() === '') {
+        throw new Error('Post ID is required and must be a non-empty string');
       }
 
-      const normalizedPostId = normalizeNoteId(postId);
+      // Skip validation for demo or test IDs
+      if (postId.includes('demo') || postId.includes('test')) {
+        console.log('Debug - Using demo mode');
+        setLoading(false);
+        return;
+      }
+
+      if (!isValidNostrNoteId(postId)) {
+        throw new Error(`Invalid Nostr note ID format: ${postId}`);
+      }
+
+      let normalizedPostId;
+      try {
+        normalizedPostId = normalizeNoteId(postId);
+        console.log('Debug - Normalized postId:', normalizedPostId);
+        console.log('Debug - Normalized length:', normalizedPostId.length);
+        
+        // Double check the result
+        if (normalizedPostId === postId) {
+          console.warn('Warning: normalizeNoteId returned the same value - normalization may have failed');
+        }
+      } catch (normalizeError) {
+        console.error('Debug - Normalization error:', normalizeError);
+        throw new Error(`Failed to normalize note ID: ${normalizeError.message}`);
+      }
+
+      // Final validation - must be 64 characters for a valid Nostr event ID
+      if (normalizedPostId.length !== 64) {
+        throw new Error(`Invalid note ID length: expected 64 characters, got ${normalizedPostId.length}`);
+      }
+
       console.log('Connecting to Nostr for post:', normalizedPostId);
       console.log('Using relays:', relays);
 
