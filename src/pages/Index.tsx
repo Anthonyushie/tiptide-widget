@@ -138,12 +138,12 @@ const Index = () => {
                     'wss://relay.damus.io',
                     'wss://relay.primal.net',
                     'wss://relay.snort.social',
-                    'wss://relay.yakihonne.com',
+                    'wss://nostr-01.yakihonne.com',
+                    'wss://nostr-02.yakihonne.com',
                     'wss://nos.lol',
                     'wss://relay.nostr.band',
                     'wss://purplepag.es',
                     'wss://nostr.wine',
-                    'wss://relay.current.fyi',
                     'wss://relay.mostr.pub',
                     'wss://relay.nostrgraph.net',
                     'wss://nostr.oxtr.dev',
@@ -231,6 +231,9 @@ const Index = () => {
                   </p>
                   <p className="text-xs text-muted-foreground font-jetbrains">
                     Enter any real Nostr note ID to see live zap data from the Lightning Network
+                  </p>
+                  <p className="text-xs text-muted-foreground font-jetbrains">
+                    💡 <strong>Tip:</strong> Try "Demo Mode" first to see how the widget looks with data, then test with real posts that have received Lightning zaps.
                   </p>
                 </div>
               </CardContent>
