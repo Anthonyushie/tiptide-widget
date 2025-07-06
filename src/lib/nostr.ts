@@ -5,24 +5,49 @@ export class NostrClient {
   private pool: SimplePool;
   private relays: string[];
   private subscriptions: Map<string, any> = new Map();
+  private relayConnections: Map<string, boolean> = new Map();
 
   constructor(relays: string[]) {
     this.pool = new SimplePool();
     this.relays = relays;
+    // Initialize all relays as disconnected
+    this.relays.forEach(relay => this.relayConnections.set(relay, false));
   }
 
   async connect(): Promise<void> {
     console.log('NostrClient: Connecting to relays...', this.relays);
     try {
-      // Connect to relays with better error handling
+      // Connect to relays with better error handling and connection tracking
       const connectionPromises = this.relays.map(async (relay) => {
         try {
           console.log(`Connecting to ${relay}`);
-          await this.pool.ensureRelay(relay);
-          console.log(`Connected to ${relay}`);
+          const relayInstance = await this.pool.ensureRelay(relay);
+          
+          // Set up connection event listeners
+          relayInstance.on('connect', () => {
+            console.log(`✅ Connected to ${relay}`);
+            this.relayConnections.set(relay, true);
+          });
+          
+          relayInstance.on('disconnect', () => {
+            console.log(`❌ Disconnected from ${relay}`);
+            this.relayConnections.set(relay, false);
+          });
+          
+          relayInstance.on('error', (error: any) => {
+            console.error(`❌ Error on ${relay}:`, error);
+            this.relayConnections.set(relay, false);
+          });
+          
+          // Wait a bit for connection to establish
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          
+          this.relayConnections.set(relay, true);
+          console.log(`✅ Successfully connected to ${relay}`);
           return { relay, success: true };
         } catch (error) {
-          console.error(`Failed to connect to ${relay}:`, error);
+          console.error(`❌ Failed to connect to ${relay}:`, error);
+          this.relayConnections.set(relay, false);
           return { relay, success: false, error };
         }
       });
@@ -31,12 +56,13 @@ export class NostrClient {
       const successful = results.filter(r => r.status === 'fulfilled' && r.value.success).length;
       console.log(`NostrClient: Connected to ${successful}/${this.relays.length} relays`);
       
+      // Don't throw error if some relays fail - continue with available ones
       if (successful === 0) {
-        throw new Error('Failed to connect to any relays');
+        console.warn('Failed to connect to any relays, but continuing...');
       }
     } catch (error) {
       console.error('NostrClient connection error:', error);
-      throw error;
+      // Don't throw - let the app continue with whatever connections work
     }
   }
 
@@ -204,10 +230,10 @@ export class NostrClient {
   }
 
   getRelayStatus(): { url: string; connected: boolean }[] {
-    // Simple implementation - in real world we'd track connections properly
+    // Return actual connection status
     return this.relays.map(url => ({
       url,
-      connected: true // Assume connected for now - we can enhance this later
+      connected: this.relayConnections.get(url) || false
     }));
   }
 

@@ -140,6 +140,7 @@ const Index = () => {
                     'wss://relay.snort.social',
                     'wss://relay.nostr.band',
                     'wss://relay.primal.net',
+                    'wss://relay.yakihonne.com',
                     'wss://purplepag.es',
                     'wss://relay.mostr.pub',
                     'wss://relay.current.fyi',
@@ -149,7 +150,10 @@ const Index = () => {
                     'wss://relay.nostrich.de',
                     'wss://nostr-pub.wellorder.net',
                     'wss://relay.orangepill.dev',
-                    'wss://brb.io'
+                    'wss://brb.io',
+                    'wss://offchain.pub',
+                    'wss://relay.nostr.info',
+                    'wss://nostr.fmt.wiz.biz'
                   ]}
                   demoMode={false} // Start in live mode by default
                   showRealtimeActivity={true}

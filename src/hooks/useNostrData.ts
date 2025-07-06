@@ -8,6 +8,7 @@ const DEFAULT_RELAYS = [
   'wss://relay.snort.social',
   'wss://relay.nostr.band',
   'wss://relay.primal.net',
+  'wss://relay.yakihonne.com',
   'wss://purplepag.es',
   'wss://relay.mostr.pub',
   'wss://relay.current.fyi',
@@ -17,7 +18,10 @@ const DEFAULT_RELAYS = [
   'wss://relay.nostrich.de',
   'wss://nostr-pub.wellorder.net',
   'wss://relay.orangepill.dev',
-  'wss://brb.io'
+  'wss://brb.io',
+  'wss://offchain.pub',
+  'wss://relay.nostr.info',
+  'wss://nostr.fmt.wiz.biz'
 ];
 
 export function useNostrData(postId: string, relays: string[] = DEFAULT_RELAYS) {
@@ -78,9 +82,9 @@ export function useNostrData(postId: string, relays: string[] = DEFAULT_RELAYS) 
       console.log('Connecting to Nostr for post:', normalizedPostId);
       console.log('Using relays:', relays);
 
-      // Test a smaller subset of relays first to avoid overwhelming connections
-      const testRelays = relays.slice(0, 5);
-      console.log('Testing with first 5 relays:', testRelays);
+      // Use more relays for better data coverage
+      const testRelays = relays.slice(0, 8);
+      console.log('Testing with first 8 relays:', testRelays);
 
       // Initialize connection tracking
       setConnections(testRelays.map(url => ({ url, connected: false })));
@@ -89,12 +93,12 @@ export function useNostrData(postId: string, relays: string[] = DEFAULT_RELAYS) 
       const client = new NostrClient(testRelays);
       clientRef.current = client;
 
-      // Connect to relays with timeout
+      // Connect to relays with longer timeout for better reliability
       console.log('Attempting to connect to relays...');
       try {
         await Promise.race([
           client.connect(),
-          new Promise((_, reject) => setTimeout(() => reject(new Error('Connection timeout')), 10000))
+          new Promise((_, reject) => setTimeout(() => reject(new Error('Connection timeout')), 15000))
         ]);
         console.log('Successfully connected to relays');
       } catch (connectError) {
@@ -112,17 +116,24 @@ export function useNostrData(postId: string, relays: string[] = DEFAULT_RELAYS) 
       
       // Don't throw error immediately - try to fetch data anyway
 
-      // Fetch historical zaps with timeout
+      // Fetch historical zaps with longer timeout for better data retrieval
       console.log('Fetching historical zaps...');
       try {
         const historicalPayments = await Promise.race([
           client.getHistoricalZaps(normalizedPostId),
           new Promise<PaymentData[]>((_, reject) => 
-            setTimeout(() => reject(new Error('Historical fetch timeout')), 15000)
+            setTimeout(() => reject(new Error('Historical fetch timeout')), 20000)
           )
         ]);
         console.log('Fetched historical payments:', historicalPayments.length);
         setPayments(historicalPayments);
+        
+        // If we got data, log success
+        if (historicalPayments.length > 0) {
+          console.log('✅ Successfully fetched real zap data from relays');
+        } else {
+          console.log('ℹ️ No historical zaps found for this post');
+        }
       } catch (fetchError) {
         console.error('Historical fetch failed:', fetchError);
         // Continue with empty payments - subscription might still work
