@@ -129,11 +129,15 @@ export class NostrClient {
       const sender = zapRequest.pubkey || event.pubkey;
 
       return {
-        amount: amount, // in millisats
-        timestamp: event.created_at * 1000, // Convert to milliseconds
-        sender: sender,
-        message: message
-      };
+      amount: amount, // in millisats
+      timestamp: event.created_at * 1000, // Convert to milliseconds
+      sender: sender,
+      message: message,
+      // amount: 0,
+      // timestamp: 0,
+      eventId: '',
+      id: undefined,
+    };
     } catch (error) {
       console.error('Error parsing zap receipt:', error);
       return null;

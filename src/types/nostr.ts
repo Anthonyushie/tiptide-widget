@@ -17,12 +17,14 @@ export interface ZapRequest extends NostrEvent {
 }
 
 export interface PaymentData {
+  id: any;
   amount: number; // in millisats
   timestamp: number;
   sender?: string;
   message?: string;
   bolt11?: string;
   preimage?: string;
+  eventId: string;
 }
 
 export interface AggregatedStats {
