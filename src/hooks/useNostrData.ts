@@ -3,18 +3,25 @@ import { PaymentData, AggregatedStats, RelayConnection } from '@/types/nostr';
 import { NostrClient } from '@/lib/nostr';
 import { nip19 } from 'nostr-tools';
 
-// Prioritized list of reliable Nostr relays
+// Enhanced relay list with Yakihonne relays prioritized and more reliable relays
 const DEFAULT_RELAYS = [
+  // Yakihonne relays (highest priority)
+  'wss://nostr-01.yakihonne.com',
+  'wss://nostr-02.yakihonne.com',
+  'wss://nostr-03.yakihonne.com',
+  'wss://nostr-04.yakihonne.com',
+  
+  // High-performance relays
   'wss://relay.damus.io',
   'wss://relay.primal.net',
   'wss://relay.snort.social',
-  'wss://nostr-01.yakihonne.com',
-  'wss://nostr-02.yakihonne.com',
   'wss://nos.lol',
   'wss://relay.nostr.band',
   'wss://purplepag.es',
   'wss://nostr.wine',
   'wss://relay.mostr.pub',
+  
+  // Additional reliable relays
   'wss://relay.nostrgraph.net',
   'wss://nostr.oxtr.dev',
   'wss://relay.nostrich.de',
@@ -27,7 +34,12 @@ const DEFAULT_RELAYS = [
   'wss://relay.nostr.bg',
   'wss://nostr.mom',
   'wss://relay.nostrati.com',
-  'wss://relay.bitcoiner.social'
+  'wss://relay.bitcoiner.social',
+  'wss://relay.current.fyi',
+  'wss://eden.nostr.land',
+  'wss://nostr.fmt.wiz.biz',
+  'wss://relay.nostr.ch',
+  'wss://nostr-relay.wlvs.space'
 ];
 
 // Fixed normalization function
@@ -149,8 +161,8 @@ export function useNostrData(postId: string, relays: string[] = DEFAULT_RELAYS) 
       setLoading(true);
       setError(null);
 
-      // Debug logging
-      console.log('Debug - Original postId:', postId);
+      console.log('🚀 Enhanced Nostr connection starting...');
+      console.log('📍 Prioritizing Yakihonne relays:', relays.filter(r => r.includes('yakihonne')));
 
       // Validate post ID
       if (!postId || typeof postId !== 'string' || postId.trim() === '') {
@@ -159,7 +171,7 @@ export function useNostrData(postId: string, relays: string[] = DEFAULT_RELAYS) 
 
       // Skip validation for demo or test IDs
       if (postId.includes('demo') || postId.includes('test')) {
-        console.log('Debug - Using demo mode');
+        console.log('🎭 Demo mode activated');
         setLoading(false);
         return;
       }
@@ -171,119 +183,128 @@ export function useNostrData(postId: string, relays: string[] = DEFAULT_RELAYS) 
       let normalizedPostId;
       try {
         normalizedPostId = normalizeNoteId(postId);
-        console.log('Debug - Normalized postId:', normalizedPostId);
-        console.log('Debug - Normalized length:', normalizedPostId.length);
-        
-        // Double check the result
-        if (normalizedPostId === postId) {
-          console.warn('Warning: normalizeNoteId returned the same value - normalization may have failed');
-        }
+        console.log('✅ Normalized note ID:', normalizedPostId);
       } catch (normalizeError) {
-        console.error('Debug - Normalization error:', normalizeError);
+        console.error('❌ Normalization error:', normalizeError);
         throw new Error(`Failed to normalize note ID: ${normalizeError.message}`);
       }
 
-      // Final validation - must be 64 characters for a valid Nostr event ID
-      if (normalizedPostId.length !== 64) {
-        throw new Error(`Invalid note ID length: expected 64 characters, got ${normalizedPostId.length}`);
-      }
-
-      console.log('Connecting to Nostr for post:', normalizedPostId);
-      console.log('Using relays:', relays);
-
-      // Use more relays for better data coverage
-      const testRelays = relays.slice(0, 10);
-      console.log('Testing with first 10 relays:', testRelays);
+      // Use more relays for better coverage, prioritizing Yakihonne
+      const prioritizedRelays = [
+        ...relays.filter(r => r.includes('yakihonne')), // Yakihonne first
+        ...relays.filter(r => !r.includes('yakihonne')).slice(0, 15) // Then others
+      ];
+      
+      console.log('🔗 Using prioritized relays:', prioritizedRelays.length);
+      console.log('⚡ Yakihonne relays:', prioritizedRelays.filter(r => r.includes('yakihonne')).length);
 
       // Initialize connection tracking
-      setConnections(testRelays.map(url => ({ url, connected: false })));
+      setConnections(prioritizedRelays.map(url => ({ url, connected: false })));
 
-      // Create Nostr client with subset of relays
-      const client = new NostrClient(testRelays);
+      // Create enhanced Nostr client
+      const client = new NostrClient(prioritizedRelays);
       clientRef.current = client;
 
-      // Connect to relays with longer timeout for better reliability
-      console.log('Attempting to connect to relays...');
+      // Connect with extended timeout for better reliability
+      console.log('🔌 Connecting to relays...');
       try {
         await Promise.race([
           client.connect(),
-          new Promise((_, reject) => setTimeout(() => reject(new Error('Connection timeout')), 20000))
+          new Promise((_, reject) => setTimeout(() => reject(new Error('Connection timeout')), 30000))
         ]);
-        console.log('Successfully connected to relays');
+        console.log('✅ Relay connection phase completed');
       } catch (connectError) {
-        console.error('Connection failed:', connectError);
-        // Continue anyway - some relays might still work
+        console.warn('⚠️ Some relays failed to connect:', connectError);
+        // Continue anyway - the pool might still work
       }
 
       // Update connection status
       const relayStatus = client.getRelayStatus();
       setConnections(relayStatus);
 
-      // Continue even if no relays show as "connected" - the pool might still work
       const connectedRelays = relayStatus.filter(r => r.connected);
-      console.log(`Relay status: ${connectedRelays.length}/${testRelays.length} relays report as connected`);
+      const yakihonneConnected = connectedRelays.filter(r => r.url.includes('yakihonne'));
       
-      // Don't throw error immediately - try to fetch data anyway
+      console.log(`📊 Connection Status:`);
+      console.log(`   Total: ${connectedRelays.length}/${prioritizedRelays.length} relays`);
+      console.log(`   Yakihonne: ${yakihonneConnected.length}/4 relays`);
+      console.log(`   Other: ${connectedRelays.length - yakihonneConnected.length} relays`);
 
-      // Fetch historical zaps with longer timeout for better data retrieval
-      console.log('Fetching historical zaps...');
+      // Fetch historical zaps with extended timeout and better error handling
+      console.log('📚 Fetching historical zap data...');
       try {
         const historicalPayments = await Promise.race([
           client.getHistoricalZaps(normalizedPostId),
           new Promise<PaymentData[]>((_, reject) => 
-            setTimeout(() => reject(new Error('Historical fetch timeout')), 25000)
+            setTimeout(() => reject(new Error('Historical fetch timeout')), 35000)
           )
         ]);
-        console.log('Fetched historical payments:', historicalPayments.length);
+        
+        console.log(`💰 Historical zaps found: ${historicalPayments.length}`);
+        
+        if (historicalPayments.length > 0) {
+          // Log relay sources for the data
+          const yakihonneData = historicalPayments.filter(p => p.source?.includes('yakihonne'));
+          console.log(`⚡ Yakihonne zaps: ${yakihonneData.length}/${historicalPayments.length}`);
+        }
+        
         setPayments(historicalPayments);
         
-        // If we got data, log success
         if (historicalPayments.length > 0) {
-          console.log('✅ Successfully fetched real zap data from relays');
+          console.log('🎉 Successfully fetched real zap data!');
         } else {
           console.log('ℹ️ No historical zaps found for this post');
         }
       } catch (fetchError) {
-        console.error('Historical fetch failed:', fetchError);
-        // Continue with empty payments - subscription might still work
+        console.error('❌ Historical fetch failed:', fetchError);
         setPayments([]);
       }
 
-      // Subscribe to new zaps
-      console.log('Subscribing to new zaps...');
+      // Subscribe to new zaps with enhanced handling
+      console.log('🔔 Setting up real-time zap subscription...');
       const cleanup = client.subscribeToZaps(
         normalizedPostId,
         (newPayment: PaymentData) => {
-          console.log('New payment received:', newPayment);
+          console.log('⚡ New zap received:', {
+            amount: Math.round(newPayment.amount / 1000),
+            source: newPayment.source || 'unknown',
+            message: newPayment.message ? newPayment.message.substring(0, 20) + '...' : 'no message'
+          });
+          
           setPayments(prev => {
-            // Check if payment already exists (prevent duplicates)
+            // Enhanced duplicate detection
             const exists = prev.some(p => 
-              p.timestamp === newPayment.timestamp && 
+              Math.abs(p.timestamp - newPayment.timestamp) < 1000 && // Within 1 second
               p.amount === newPayment.amount &&
               p.sender === newPayment.sender
             );
             
             if (exists) {
+              console.log('🔄 Duplicate zap filtered out');
               return prev;
             }
             
             // Add new payment and sort by timestamp
             const updated = [newPayment, ...prev].sort((a, b) => b.timestamp - a.timestamp);
+            console.log(`📈 Total zaps now: ${updated.length}`);
             return updated;
           });
         },
         (error: string) => {
-          console.error('Subscription error:', error);
+          console.error('🚨 Subscription error:', error);
           // Don't set error state for subscription issues - just log them
-          console.warn('Subscription failed, but continuing...');
         }
       );
 
       cleanupRef.current = cleanup;
       setLoading(false);
 
+      // Log final status
+      console.log('🏁 Nostr integration setup complete');
+      console.log('🔄 Monitoring for real-time zaps...');
+
     } catch (err) {
-      console.error('Nostr connection error:', err);
+      console.error('💥 Nostr connection error:', err);
       const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
       setError(errorMessage);
       setLoading(false);
@@ -292,6 +313,8 @@ export function useNostrData(postId: string, relays: string[] = DEFAULT_RELAYS) 
 
   const reconnect = useCallback(() => {
     if (postId && relays.length > 0) {
+      console.log('🔄 Reconnecting to Nostr...');
+      
       // Cleanup existing connection
       if (cleanupRef.current) {
         cleanupRef.current();
@@ -341,7 +364,7 @@ export function useNostrData(postId: string, relays: string[] = DEFAULT_RELAYS) 
     setStats(calculateStats(payments));
   }, [payments, calculateStats]);
 
-  // Periodic connection status update
+  // Enhanced periodic connection status update
   useEffect(() => {
     if (!clientRef.current || postId === 'demo-post-id') return;
 
@@ -349,8 +372,16 @@ export function useNostrData(postId: string, relays: string[] = DEFAULT_RELAYS) 
       if (clientRef.current) {
         const relayStatus = clientRef.current.getRelayStatus();
         setConnections(relayStatus);
+        
+        // Log Yakihonne status periodically
+        const yakihonneStatus = relayStatus.filter(r => r.url.includes('yakihonne'));
+        const yakihonneConnected = yakihonneStatus.filter(r => r.connected).length;
+        
+        if (yakihonneConnected !== yakihonneStatus.length) {
+          console.log(`⚡ Yakihonne status: ${yakihonneConnected}/${yakihonneStatus.length} connected`);
+        }
       }
-    }, 10000); // Update every 10 seconds
+    }, 15000); // Check every 15 seconds
 
     return () => clearInterval(interval);
   }, [postId]);

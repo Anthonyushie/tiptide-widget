@@ -25,6 +25,7 @@ export interface PaymentData {
   bolt11?: string;
   preimage?: string;
   eventId: string;
+  source?: string; // Which relay the data came from
 }
 
 export interface AggregatedStats {
@@ -47,6 +48,11 @@ export interface RelayConnection {
   url: string;
   connected: boolean;
   error?: string;
+  metrics?: {
+    events: number;
+    errors: number;
+    latency: number;
+  };
 }
 
 export interface NostrFilter {
