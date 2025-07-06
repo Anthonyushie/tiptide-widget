@@ -21,36 +21,22 @@ export class NostrClient {
     this.relays.forEach(relay => this.relayConnections.set(relay, false));
     
     try {
-      // Connect to relays with simplified but more reliable approach
+      // Connect to relays using the correct nostr-tools API with timeout
       const connectionPromises = this.relays.map(async (relay) => {
         try {
           console.log(`🔄 Attempting to connect to ${relay}`);
           
-          // Use ensureRelay and assume success if no error is thrown
-          const relayInstance = await this.pool.ensureRelay(relay);
+          // Use ensureRelay with timeout to prevent hanging
+          await Promise.race([
+            this.pool.ensureRelay(relay),
+            new Promise((_, reject) => 
+              setTimeout(() => reject(new Error('Connection timeout')), 10000)
+            )
+          ]);
           
-          // Set up event listeners
-          relayInstance.on('connect', () => {
-            console.log(`✅ Connected to ${relay}`);
-            this.relayConnections.set(relay, true);
-          });
-          
-          relayInstance.on('disconnect', () => {
-            console.log(`❌ Disconnected from ${relay}`);
-            this.relayConnections.set(relay, false);
-          });
-          
-          relayInstance.on('error', (error: any) => {
-            console.error(`❌ Error on ${relay}:`, error);
-            this.relayConnections.set(relay, false);
-          });
-          
-          // Give some time for connection to establish and mark as connected
-          await new Promise(resolve => setTimeout(resolve, 2000));
-          
-          // Assume connected if we got this far without errors
+          // If we get here without error, consider it connected
           this.relayConnections.set(relay, true);
-          console.log(`✅ Marked ${relay} as connected`);
+          console.log(`✅ Successfully connected to ${relay}`);
           
           return { relay, success: true };
         } catch (error) {
@@ -71,7 +57,12 @@ export class NostrClient {
       });
       
       if (successful === 0) {
-        console.warn('⚠️ Failed to connect to any relays, but continuing...');
+        console.warn('⚠️ Failed to connect to any relays individually, trying fallback approach...');
+        // Fallback: assume all relays are available for the pool to use
+        // SimplePool can handle connections internally even if ensureRelay fails
+        this.relays.forEach(relay => this.relayConnections.set(relay, true));
+        console.log('🔄 Using fallback connection mode - assuming relays are available');
+        console.log('💡 Note: SimplePool will attempt connections when needed for queries/subscriptions');
       } else {
         console.log(`🎉 Successfully connected to ${successful} relay(s)`);
       }
@@ -103,13 +94,11 @@ export class NostrClient {
       const connectedRelays = this.relays.filter(relay => this.relayConnections.get(relay));
       console.log('🔔 Connected relays for subscription:', connectedRelays);
       
-      if (connectedRelays.length === 0) {
-        console.warn('⚠️ No connected relays available for subscription');
-        onError('No connected relays available');
-        return () => {};
-      }
+      // Use all relays if we have connections, otherwise try with all relays as fallback
+      const relaysToUse = connectedRelays.length > 0 ? connectedRelays : this.relays;
+      console.log('🔔 Using relays for subscription:', relaysToUse);
 
-      const sub = this.pool.subscribeMany(connectedRelays, [filter], {
+      const sub = this.pool.subscribeMany(relaysToUse, [filter], {
         onevent: (event: Event) => {
           console.log('Received zap event:', event);
           try {
@@ -241,12 +230,11 @@ export class NostrClient {
       const connectedRelays = this.relays.filter(relay => this.relayConnections.get(relay));
       console.log('🔍 Connected relays for query:', connectedRelays);
       
-      if (connectedRelays.length === 0) {
-        console.warn('⚠️ No connected relays available for historical query');
-        return [];
-      }
+      // Use all relays if we have connections, otherwise try with all relays as fallback
+      const relaysToUse = connectedRelays.length > 0 ? connectedRelays : this.relays;
+      console.log('🔍 Using relays for query:', relaysToUse);
       
-      const events = await this.pool.querySync(connectedRelays, filter);
+      const events = await this.pool.querySync(relaysToUse, filter);
       console.log('📦 Found historical zap events:', events.length);
 
       const payments: PaymentData[] = [];

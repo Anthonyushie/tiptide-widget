@@ -188,8 +188,8 @@ export function useNostrData(postId: string, relays: string[] = DEFAULT_RELAYS) 
       console.log('Using relays:', relays);
 
       // Use more relays for better data coverage
-      const testRelays = relays.slice(0, 8);
-      console.log('Testing with first 8 relays:', testRelays);
+      const testRelays = relays.slice(0, 10);
+      console.log('Testing with first 10 relays:', testRelays);
 
       // Initialize connection tracking
       setConnections(testRelays.map(url => ({ url, connected: false })));
