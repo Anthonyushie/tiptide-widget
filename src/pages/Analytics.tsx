@@ -2,6 +2,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
+import { toast } from '@/hooks/use-toast';
 
 interface AnalyticsProps {
   onBackToWidget?: () => void;
@@ -15,6 +16,14 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
       onBackToWidget();
     }
     navigate('/');
+  };
+
+  const handleComingSoon = (feature: string) => {
+    toast({
+      title: "🚧 Coming Soon!",
+      description: `${feature} feature is currently under development and will be available in a future update.`,
+      duration: 4000,
+    });
   };
 
   return (
@@ -281,10 +290,18 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
                   Data Export
                 </h4>
                 <div className="space-y-2">
-                  <Button variant="outline" className="w-full font-jetbrains">
+                  <Button 
+                    variant="outline" 
+                    className="w-full font-jetbrains"
+                    onClick={() => handleComingSoon('CSV Export')}
+                  >
                     Export CSV
                   </Button>
-                  <Button variant="outline" className="w-full font-jetbrains">
+                  <Button 
+                    variant="outline" 
+                    className="w-full font-jetbrains"
+                    onClick={() => handleComingSoon('JSON Export')}
+                  >
                     Export JSON
                   </Button>
                 </div>
@@ -295,10 +312,18 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
                   Settings
                 </h4>
                 <div className="space-y-2">
-                  <Button variant="outline" className="w-full font-jetbrains">
+                  <Button 
+                    variant="outline" 
+                    className="w-full font-jetbrains"
+                    onClick={() => handleComingSoon('Alert Configuration')}
+                  >
                     Configure Alerts
                   </Button>
-                  <Button variant="outline" className="w-full font-jetbrains">
+                  <Button 
+                    variant="outline" 
+                    className="w-full font-jetbrains"
+                    onClick={() => handleComingSoon('API Settings')}
+                  >
                     API Settings
                   </Button>
                 </div>
