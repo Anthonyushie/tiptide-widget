@@ -107,21 +107,23 @@ export function TiptideWidget({
   if (compactMode) {
     return (
       <Card className={`bg-card/95 backdrop-blur-sm ${className}`}>
-        <CardContent className="p-4">
-          <div className="flex items-center justify-between space-x-4">
-            <PaymentStatsDisplay stats={displayStats} loading={loading && !showDemo} compact />
+        <CardContent className="p-3 sm:p-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
+            <div className="flex-1 w-full">
+              <PaymentStatsDisplay stats={displayStats} loading={loading && !showDemo} compact />
+            </div>
             <Button 
               variant="accent"
               size="sm" 
               onClick={handleTipClick}
-              className="font-jetbrains"
+              className="font-jetbrains w-full sm:w-auto"
             >
               Tip ⚡
             </Button>
           </div>
           {!isConnected && !showDemo && (
             <div className="mt-3 text-center">
-              <Badge variant="outline" className="font-jetbrains font-semibold">
+              <Badge variant="outline" className="font-jetbrains font-semibold text-xs">
                 {loading ? 'Connecting to Nostr...' : 'Connection failed'}
               </Badge>
             </div>
@@ -133,16 +135,16 @@ export function TiptideWidget({
 
   return (
     <Card className={`bg-card/95 backdrop-blur-sm ${className}`}>
-      <CardHeader className="space-y-0 pb-4">
+      <CardHeader className="space-y-0 pb-3 sm:pb-4">
         {/* Header */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <CardTitle className="gradient-text-bitcoin font-space text-2xl">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between gap-3 sm:gap-4">
+          <div className="flex items-center space-x-3 sm:space-x-4">
+            <CardTitle className="gradient-text-bitcoin font-space text-xl sm:text-2xl">
               Tiptide
             </CardTitle>
             <Badge 
               variant={isConnected ? 'success' : 'outline'}
-              className="font-jetbrains font-semibold"
+              className="font-jetbrains font-semibold text-xs"
             >
               {showDemo ? '🎭 Demo' : isConnected ? '⚡ Live' : loading ? '🔄 Connecting' : '❌ Offline'}
             </Badge>
@@ -152,30 +154,30 @@ export function TiptideWidget({
             variant="outline"
             size="sm"
             onClick={toggleDemo}
-            className="font-jetbrains"
+            className="font-jetbrains text-xs sm:text-sm w-full sm:w-auto"
           >
             {showDemo ? 'Go Live' : 'Demo Mode'}
           </Button>
         </div>
       </CardHeader>
 
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-4 sm:space-y-6">
         {/* Loading State */}
         {loading && !showDemo && (
-          <div className="py-12 text-center">
+          <div className="py-8 sm:py-12 text-center">
             <LoadingSpinner size="lg" message="Connecting to Nostr relays..." />
           </div>
         )}
 
         {/* Error State */}
         {error && !showDemo && (
-          <div className="text-center py-8 space-y-4">
-            <div className="brutal-border bg-destructive/20 p-4 brutal-shadow rounded-md">
-              <div className="text-lg font-semibold text-foreground font-jetbrains">
+          <div className="text-center py-6 sm:py-8 space-y-4">
+            <div className="brutal-border bg-destructive/20 p-3 sm:p-4 brutal-shadow rounded-md">
+              <div className="text-sm sm:text-lg font-semibold text-foreground font-jetbrains">
                 ⚠️ {error}
               </div>
             </div>
-            <Button variant="outline" onClick={reconnect} className="font-jetbrains">
+            <Button variant="outline" onClick={reconnect} className="font-jetbrains text-xs sm:text-sm">
               Retry Connection
             </Button>
           </div>
@@ -185,12 +187,12 @@ export function TiptideWidget({
         {(!loading || showDemo) && !error && (
           <>
             {/* Social Proof Message */}
-            <div className="py-4">
+            <div className="py-2 sm:py-4">
               <SocialProofMessage stats={displayStats} loading={loading && !showDemo} />
             </div>
 
             {/* Payment Stats */}
-            <div className="brutal-border bg-muted/20 p-6 brutal-shadow rounded-md">
+            <div className="brutal-border bg-muted/20 p-4 sm:p-6 brutal-shadow rounded-md">
               <PaymentStatsDisplay stats={displayStats} loading={loading && !showDemo} />
             </div>
 
@@ -203,12 +205,12 @@ export function TiptideWidget({
             )}
 
             {/* Action Button */}
-            <div className="flex justify-center pt-4">
+            <div className="flex justify-center pt-2 sm:pt-4">
               <Button 
                 variant="accent"
                 size="lg"
                 onClick={handleTipClick}
-                className="font-jetbrains text-lg animate-pulse-glow"
+                className="font-jetbrains text-base sm:text-lg animate-pulse-glow w-full sm:w-auto"
               >
                 {displayStats.totalCount > 0 ? 'Join the tip frenzy! ⚡' : 'Break the silence! ⚡'}
               </Button>
@@ -216,11 +218,11 @@ export function TiptideWidget({
 
             {/* Connection Status */}
             {!showDemo && (
-              <div className="text-center brutal-border bg-card/50 p-3 brutal-shadow-sm rounded-md">
+              <div className="text-center brutal-border bg-card/50 p-2 sm:p-3 brutal-shadow-sm rounded-md">
                 <div className="text-xs font-semibold text-muted-foreground font-jetbrains">
                   Connected to {connections.filter(c => c.connected).length}/{connections.length} relays
                   {connections.length > 0 && (
-                    <div className="mt-1 text-xs">
+                    <div className="mt-1 text-xs flex justify-center">
                       {connections.map(conn => (
                         <span key={conn.url} className={`inline-block w-2 h-2 rounded-full mr-1 ${conn.connected ? 'bg-success' : 'bg-destructive'}`} />
                       ))}

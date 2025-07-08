@@ -42,60 +42,60 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
         <div className="absolute top-1/2 right-16 text-5xl text-success/10 animate-pulse-glow">⚡</div>
       </div>
 
-      <div className="relative z-10 container mx-auto px-6 py-12 max-w-7xl">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 py-8 sm:py-12 max-w-7xl">
         {/* Header */}
-        <div className="mb-12">
-          <div className="brutal-card-accent p-8 text-center">
-            <h1 className="text-5xl font-bold mb-4 gradient-text-bitcoin font-space">
+        <div className="mb-8 sm:mb-12">
+          <div className="brutal-card-accent p-4 sm:p-6 md:p-8 text-center">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-4 gradient-text-bitcoin font-space">
               Analytics Dashboard
             </h1>
-            <p className="text-xl font-jetbrains text-muted-foreground">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl font-jetbrains text-muted-foreground">
               Deep insights into Lightning Network zap activity
             </p>
           </div>
         </div>
 
         {/* Stats Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12">
           <Card className="bg-accent/10">
-            <CardContent className="p-6 text-center">
-              <div className="text-4xl font-bold text-accent mb-2 font-jetbrains">
+            <CardContent className="p-4 sm:p-6 text-center">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-accent mb-1 sm:mb-2 font-jetbrains">
                 1,247
               </div>
-              <div className="text-sm font-semibold text-muted-foreground">
+              <div className="text-xs sm:text-sm font-semibold text-muted-foreground">
                 Total Zaps
               </div>
             </CardContent>
           </Card>
           
           <Card className="bg-bitcoin/10">
-            <CardContent className="p-6 text-center">
-              <div className="text-4xl font-bold text-bitcoin mb-2 font-jetbrains">
+            <CardContent className="p-4 sm:p-6 text-center">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-bitcoin mb-1 sm:mb-2 font-jetbrains">
                 89.2K
               </div>
-              <div className="text-sm font-semibold text-muted-foreground">
+              <div className="text-xs sm:text-sm font-semibold text-muted-foreground">
                 Total Sats
               </div>
             </CardContent>
           </Card>
           
           <Card className="bg-success/10">
-            <CardContent className="p-6 text-center">
-              <div className="text-4xl font-bold text-success mb-2 font-jetbrains">
+            <CardContent className="p-4 sm:p-6 text-center">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-success mb-1 sm:mb-2 font-jetbrains">
                 156
               </div>
-              <div className="text-sm font-semibold text-muted-foreground">
+              <div className="text-xs sm:text-sm font-semibold text-muted-foreground">
                 Active Posts
               </div>
             </CardContent>
           </Card>
           
           <Card className="bg-info/10">
-            <CardContent className="p-6 text-center">
-              <div className="text-4xl font-bold text-info mb-2 font-jetbrains">
+            <CardContent className="p-4 sm:p-6 text-center">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-info mb-1 sm:mb-2 font-jetbrains">
                 23
               </div>
-              <div className="text-sm font-semibold text-muted-foreground">
+              <div className="text-xs sm:text-sm font-semibold text-muted-foreground">
                 Relays Connected
               </div>
             </CardContent>
@@ -103,22 +103,22 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
         </div>
 
         {/* Charts Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
           {/* Zap Activity Chart */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-foreground flex items-center justify-between">
-                Zap Activity Over Time
-                <Badge variant="accent" className="font-jetbrains">
+              <CardTitle className="text-foreground flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                <span className="text-sm sm:text-base">Zap Activity Over Time</span>
+                <Badge variant="accent" className="font-jetbrains text-xs w-fit">
                   Live
                 </Badge>
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="h-64 brutal-border bg-muted/20 brutal-shadow-sm rounded-md flex items-center justify-center">
+              <div className="h-48 sm:h-64 brutal-border bg-muted/20 brutal-shadow-sm rounded-md flex items-center justify-center">
                 <div className="text-center">
-                  <div className="text-6xl mb-4">📊</div>
-                  <div className="font-jetbrains text-muted-foreground">
+                  <div className="text-3xl sm:text-4xl md:text-6xl mb-2 sm:mb-4">📊</div>
+                  <div className="font-jetbrains text-xs sm:text-sm text-muted-foreground">
                     Interactive Chart Area
                   </div>
                 </div>

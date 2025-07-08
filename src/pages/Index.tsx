@@ -140,25 +140,25 @@ const Index = () => {
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-background/80 via-transparent to-background/60" />
         
-        <div className="relative container mx-auto px-6 py-24 text-center">
-          <h1 className="text-8xl font-bold mb-8 gradient-text-bitcoin font-space relative z-10">
+        <div className="relative container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-24 text-center">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-4 sm:mb-6 md:mb-8 gradient-text-bitcoin font-space relative z-10">
             Tiptide
           </h1>
-          <div className="brutal-card-accent p-8 mx-auto max-w-3xl relative z-10">
-            <p className="text-3xl font-bold mb-4 font-space">
+          <div className="brutal-card-accent p-4 sm:p-6 md:p-8 mx-auto max-w-xs sm:max-w-2xl md:max-w-3xl relative z-10">
+            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-2 sm:mb-4 font-space">
               Enhanced Nostr Zap Widget
             </p>
-            <p className="text-xl font-jetbrains text-muted-foreground mb-4">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl font-jetbrains text-muted-foreground mb-4">
               Live Lightning Network tips • Yakihonne integration • Multi-relay coverage
             </p>
-            <div className="flex items-center justify-center space-x-4 mt-6">
-              <Badge variant="accent" className="font-jetbrains">
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mt-4 sm:mt-6">
+              <Badge variant="accent" className="font-jetbrains text-xs sm:text-sm">
                 ⚡ Yakihonne Relays
               </Badge>
-              <Badge variant="secondary" className="font-jetbrains">
+              <Badge variant="secondary" className="font-jetbrains text-xs sm:text-sm">
                 🌐 30+ Relays
               </Badge>
-              <Badge variant="success" className="font-jetbrains">
+              <Badge variant="success" className="font-jetbrains text-xs sm:text-sm">
                 📊 Real-time Data
               </Badge>
             </div>
@@ -166,16 +166,16 @@ const Index = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 py-12 max-w-6xl">
+      <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 max-w-6xl">
 
         {/* Enhanced Demo Section */}
-        <div className="grid gap-12 lg:grid-cols-2">
+        <div className="grid gap-6 sm:gap-8 md:gap-12 lg:grid-cols-2">
           {/* Widget Demo */}
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             <Card>
               <CardHeader>
-                <CardTitle className="text-foreground flex items-center justify-between">
-                  Enhanced Live Widget Demo
+                <CardTitle className="text-foreground flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                  <span className="text-base sm:text-lg">Enhanced Live Widget Demo</span>
                   <div className="flex items-center space-x-2">
                     <Badge variant="accent" className="font-jetbrains text-xs">
                       ⚡ Yakihonne
