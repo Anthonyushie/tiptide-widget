@@ -3,6 +3,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { toast } from '@/hooks/use-toast';
+import { WorldMapAnimation } from '@/components/WorldMapAnimation';
 
 interface AnalyticsProps {
   onBackToWidget?: () => void;
@@ -174,16 +175,16 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
           {/* Geographic Distribution */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-foreground">Geographic Distribution</CardTitle>
+              <CardTitle className="text-foreground flex items-center justify-between">
+                Geographic Distribution
+                <Badge variant="accent" className="font-jetbrains text-xs">
+                  Live
+                </Badge>
+              </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="h-48 brutal-border bg-muted/20 brutal-shadow-sm rounded-md flex items-center justify-center">
-                <div className="text-center">
-                  <div className="text-4xl mb-2">🌍</div>
-                  <div className="font-jetbrains text-sm text-muted-foreground">
-                    World Map
-                  </div>
-                </div>
+              <div className="h-48 brutal-border bg-muted/20 brutal-shadow-sm rounded-md overflow-hidden">
+                <WorldMapAnimation />
               </div>
             </CardContent>
           </Card>
