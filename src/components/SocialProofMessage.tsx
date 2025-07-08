@@ -73,7 +73,7 @@ export function SocialProofMessage({ stats, loading }: SocialProofMessageProps) 
   if (loading) {
     return (
       <div className="text-center">
-        <div className="h-12 w-80 bg-muted brutal-border brutal-shadow animate-pulse mx-auto rounded-md" />
+        <div className="h-8 sm:h-10 md:h-12 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl bg-muted brutal-border brutal-shadow animate-pulse mx-auto rounded-md" />
       </div>
     );
   }
@@ -85,27 +85,27 @@ export function SocialProofMessage({ stats, loading }: SocialProofMessageProps) 
     switch (currentCategory) {
       case 'trending':
       case 'recent':
-        return "brutal-card-accent text-accent-foreground text-xl font-bold animate-pulse-glow";
+        return "brutal-card-accent text-accent-foreground text-sm sm:text-base md:text-lg lg:text-xl font-bold animate-pulse-glow";
       case 'many':
-        return "brutal-card bg-bitcoin/20 text-foreground text-lg font-bold brutal-shadow-bitcoin";
+        return "brutal-card bg-bitcoin/20 text-foreground text-sm sm:text-base md:text-lg font-bold brutal-shadow-bitcoin";
       case 'few':
-        return "brutal-card bg-accent/20 text-foreground text-base font-bold brutal-shadow-accent";
+        return "brutal-card bg-accent/20 text-foreground text-sm sm:text-base font-bold brutal-shadow-accent";
       default:
-        return "brutal-card bg-muted/50 text-foreground text-base font-bold";
+        return "brutal-card bg-muted/50 text-foreground text-sm sm:text-base font-bold";
     }
   };
 
   return (
-    <div className="text-center space-y-4">
-      <div className={`p-6 transition-all duration-500 animate-slide-up ${getMessageStyle()} rounded-md`}>
+    <div className="text-center space-y-3 sm:space-y-4">
+      <div className={`p-3 sm:p-4 md:p-6 transition-all duration-500 animate-slide-up ${getMessageStyle()} rounded-md`}>
         <div className="font-jetbrains">
           {currentMessage}
         </div>
       </div>
       
       {stats.totalCount > 0 && (
-        <div className="brutal-border bg-card p-3 brutal-shadow-sm rounded-md">
-          <div className="text-sm font-semibold text-muted-foreground font-jetbrains">
+        <div className="brutal-border bg-card p-2 sm:p-3 brutal-shadow-sm rounded-md">
+          <div className="text-xs sm:text-sm font-semibold text-muted-foreground font-jetbrains">
             {stats.totalCount} {stats.totalCount === 1 ? 'person has' : 'people have'} tipped this content
           </div>
         </div>
