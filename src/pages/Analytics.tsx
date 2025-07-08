@@ -18,7 +18,7 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-background relative">
+    <div className="min-h-screen bg-background relative pt-4">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
@@ -42,9 +42,9 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
         <div className="absolute top-1/2 right-16 text-5xl text-success/10 animate-pulse-glow">⚡</div>
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 py-8 sm:py-12 max-w-7xl">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 py-4 sm:py-6 max-w-7xl">
         {/* Header */}
-        <div className="mb-8 sm:mb-12">
+        <div className="mb-4 sm:mb-6">
           <div className="brutal-card-accent p-4 sm:p-6 md:p-8 text-center">
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-4 gradient-text-bitcoin font-space">
               Analytics Dashboard
@@ -56,7 +56,7 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
         </div>
 
         {/* Stats Overview */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
           <Card className="bg-accent/10">
             <CardContent className="p-4 sm:p-6 text-center">
               <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-accent mb-1 sm:mb-2 font-jetbrains">
@@ -103,7 +103,7 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
         </div>
 
         {/* Charts Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8">
           {/* Zap Activity Chart */}
           <Card>
             <CardHeader>
@@ -161,7 +161,7 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
         </div>
 
         {/* Detailed Analytics */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-10">
           {/* Geographic Distribution */}
           <Card>
             <CardHeader>
@@ -237,7 +237,7 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
         </div>
 
         {/* Advanced Features */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {/* Relay Performance */}
           <Card>
             <CardHeader>

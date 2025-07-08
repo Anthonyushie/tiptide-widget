@@ -48,14 +48,12 @@ const App = () => {
         <BrowserRouter>
           <div className="min-h-screen bg-background">
             <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
-            <div className="pt-20"> {/* Add padding to account for fixed navigation */}
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/analytics" element={<Analytics onBackToWidget={handleBackToWidget} />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
-            </div>
           </div>
         </BrowserRouter>
       </TooltipProvider>
