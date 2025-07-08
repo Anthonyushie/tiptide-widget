@@ -155,7 +155,7 @@ const Index = () => {
               <Badge variant="accent" className="font-jetbrains">
                 ⚡ Yakihonne Relays
               </Badge>
-              <Badge variant="bitcoin" className="font-jetbrains">
+              <Badge variant="secondary" className="font-jetbrains">
                 🌐 30+ Relays
               </Badge>
               <Badge variant="success" className="font-jetbrains">

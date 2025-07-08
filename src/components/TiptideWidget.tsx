@@ -17,25 +17,35 @@ interface TiptideWidgetProps extends TiptideConfig {
 // Demo data for testing
 const DEMO_PAYMENTS: PaymentData[] = [
   {
+    id: 'demo-1',
+    eventId: 'demo-event-1',
     amount: 21000, // 21 sats in millisats
     timestamp: Date.now() - 5 * 60 * 1000, // 5 minutes ago
     message: "Great content! ⚡"
   },
   {
+    id: 'demo-2',
+    eventId: 'demo-event-2',
     amount: 100000, // 100 sats
     timestamp: Date.now() - 15 * 60 * 1000, // 15 minutes ago
     message: "This is valuable"
   },
   {
+    id: 'demo-3',
+    eventId: 'demo-event-3',
     amount: 5000, // 5 sats
     timestamp: Date.now() - 30 * 60 * 1000, // 30 minutes ago
     message: "Small but mighty 🙏"
   },
   {
+    id: 'demo-4',
+    eventId: 'demo-event-4',
     amount: 50000, // 50 sats
     timestamp: Date.now() - 2 * 60 * 60 * 1000, // 2 hours ago
   },
   {
+    id: 'demo-5',
+    eventId: 'demo-event-5',
     amount: 210000, // 210 sats
     timestamp: Date.now() - 6 * 60 * 60 * 1000, // 6 hours ago
     message: "Excellent work!"
@@ -101,7 +111,7 @@ export function TiptideWidget({
           <div className="flex items-center justify-between space-x-4">
             <PaymentStatsDisplay stats={displayStats} loading={loading && !showDemo} compact />
             <Button 
-              variant="bitcoin"
+              variant="accent"
               size="sm" 
               onClick={handleTipClick}
               className="font-jetbrains"

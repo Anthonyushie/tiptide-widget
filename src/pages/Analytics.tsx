@@ -309,10 +309,10 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
       </div>
 
       {/* Coming Soon Overlay - Reduced Size */}
-      <div className="fixed inset-0 bg-background/90 backdrop-blur-md z-50 flex items-center justify-center p-6">
+      {/* <div className="fixed inset-0 bg-background/90 backdrop-blur-md z-50 flex items-center justify-center p-6">
         <div className="text-center space-y-6 max-w-lg mx-auto">
           {/* Main Coming Soon Message - Smaller */}
-          <div className="brutal-card-accent p-8">
+          {/* <div className="brutal-card-accent p-8">
             <div className="text-6xl mb-4 animate-pulse-glow">⚡</div>
             <h1 className="text-4xl font-bold mb-4 gradient-text-bitcoin font-space">
               Coming Soon
@@ -322,7 +322,7 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
             </p>
             
             {/* Feature Preview - Smaller */}
-            <div className="grid grid-cols-3 gap-4 mb-6">
+            {/* <div className="grid grid-cols-3 gap-4 mb-6">
               <div className="brutal-border bg-accent/20 p-3 brutal-shadow-accent rounded-md">
                 <div className="text-2xl mb-1">📊</div>
                 <div className="font-bold font-space text-xs">
@@ -351,7 +351,7 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
           </div>
           
           {/* Back Button */}
-          <Button 
+          {/* <Button 
             variant="bitcoin" 
             size="lg" 
             className="font-jetbrains text-base px-8"
@@ -360,7 +360,7 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
             ← Back to Widget Demo
           </Button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
