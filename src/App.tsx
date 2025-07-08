@@ -31,6 +31,15 @@ const App = () => {
     setActiveTab('widget');
   };
 
+  // Handle URL-based navigation
+  useEffect(() => {
+    const path = window.location.pathname;
+    if (path === '/analytics') {
+      setActiveTab('analytics');
+    } else {
+      setActiveTab('widget');
+    }
+  }, []);
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
@@ -41,9 +50,7 @@ const App = () => {
             <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
             <div className="pt-20"> {/* Add padding to account for fixed navigation */}
               <Routes>
-                <Route path="/" element={
-                  activeTab === 'widget' ? <Index /> : <Analytics onBackToWidget={handleBackToWidget} />
-                } />
+                <Route path="/" element={<Index />} />
                 <Route path="/analytics" element={<Analytics onBackToWidget={handleBackToWidget} />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />

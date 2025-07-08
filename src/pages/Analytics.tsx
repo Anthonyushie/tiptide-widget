@@ -1,20 +1,20 @@
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 interface AnalyticsProps {
   onBackToWidget?: () => void;
 }
 
 const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
+  const navigate = useNavigate();
+
   const handleBackClick = () => {
     if (onBackToWidget) {
       onBackToWidget();
-    } else {
-      // Navigate back to widget demo by changing the active tab
-      const event = new CustomEvent('navigateToWidget');
-      window.dispatchEvent(event);
     }
+    navigate('/');
   };
 
   return (
