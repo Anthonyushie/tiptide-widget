@@ -106,82 +106,77 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background pt-4">
-      {/* Hero Section */}
+    <div className="min-h-screen bg-background pt-2 sm:pt-4">
+      {/* Hero Section - Optimized for mobile */}
       <div className="relative overflow-hidden bg-gradient-subtle">
-        {/* Enhanced Background Pattern */}
-        <div className="absolute inset-0 opacity-20">
-          {/* Grid Pattern */}
+        {/* Enhanced Background Pattern - Reduced on mobile */}
+        <div className="absolute inset-0 opacity-10 sm:opacity-20">
+          {/* Grid Pattern - Smaller on mobile */}
           <div className="absolute inset-0" style={{
             backgroundImage: `
               linear-gradient(hsl(var(--accent)) 1px, transparent 1px),
               linear-gradient(90deg, hsl(var(--accent)) 1px, transparent 1px)
             `,
-            backgroundSize: '60px 60px'
+            backgroundSize: '40px 40px'
           }} />
           
-          {/* Enhanced Floating Geometric Shapes */}
-          <div className="absolute top-20 left-20 w-32 h-32 border-4 border-accent/30 rotate-45 animate-subtle-bounce" style={{ animationDelay: '0s' }} />
-          <div className="absolute top-40 right-32 w-24 h-24 bg-bitcoin/20 border-4 border-bitcoin/40 rotate-12 animate-subtle-bounce" style={{ animationDelay: '1s' }} />
-          <div className="absolute bottom-32 left-32 w-20 h-20 border-4 border-success/30 -rotate-12 animate-subtle-bounce" style={{ animationDelay: '2s' }} />
-          <div className="absolute top-60 left-1/2 w-16 h-16 bg-accent/10 border-4 border-accent/30 rotate-45 animate-subtle-bounce" style={{ animationDelay: '0.5s' }} />
-          <div className="absolute bottom-20 right-20 w-28 h-28 border-4 border-bitcoin/20 -rotate-45 animate-subtle-bounce" style={{ animationDelay: '1.5s' }} />
+          {/* Reduced floating shapes for mobile */}
+          <div className="hidden sm:block absolute top-20 left-20 w-32 h-32 border-4 border-accent/30 rotate-45 animate-subtle-bounce" />
+          <div className="absolute top-20 right-8 sm:right-32 w-16 sm:w-24 h-16 sm:h-24 bg-bitcoin/20 border-2 sm:border-4 border-bitcoin/40 rotate-12 animate-subtle-bounce" />
+          <div className="hidden md:block absolute bottom-32 left-32 w-20 h-20 border-4 border-success/30 -rotate-12 animate-subtle-bounce" />
+          <div className="absolute top-32 left-1/2 w-12 sm:w-16 h-12 sm:h-16 bg-accent/10 border-2 sm:border-4 border-accent/30 rotate-45 animate-subtle-bounce" />
           
-          {/* Enhanced Lightning Bolt Shapes */}
-          <div className="absolute top-32 right-1/4 text-6xl text-accent/20 animate-pulse-glow" style={{ animationDelay: '0.5s' }}>⚡</div>
-          <div className="absolute bottom-40 left-1/4 text-4xl text-bitcoin/30 animate-pulse-glow" style={{ animationDelay: '2s' }}>⚡</div>
-          <div className="absolute top-1/2 right-16 text-5xl text-success/20 animate-pulse-glow" style={{ animationDelay: '1s' }}>⚡</div>
-          
-          {/* Yakihonne Branding Elements */}
-          <div className="absolute top-24 left-1/3 text-2xl text-accent/30 animate-pulse-glow font-jetbrains" style={{ animationDelay: '1.2s' }}>YH</div>
-          <div className="absolute bottom-24 right-1/3 text-2xl text-bitcoin/40 animate-pulse-glow font-jetbrains" style={{ animationDelay: '0.8s' }}>⚡</div>
+          {/* Reduced lightning effects for mobile */}
+          <div className="absolute top-16 sm:top-32 right-1/4 text-3xl sm:text-6xl text-accent/20 animate-pulse-glow">⚡</div>
+          <div className="hidden sm:block absolute bottom-40 left-1/4 text-4xl text-bitcoin/30 animate-pulse-glow">⚡</div>
+          <div className="absolute top-1/2 right-8 sm:right-16 text-2xl sm:text-5xl text-success/20 animate-pulse-glow">⚡</div>
         </div>
 
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-background/80 via-transparent to-background/60" />
         
-        <div className="relative container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-24 text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-4 sm:mb-6 md:mb-8 gradient-text-bitcoin font-space relative z-10">
+        <div className="relative container mx-auto px-3 sm:px-6 py-8 sm:py-16 md:py-24 text-center">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-3 sm:mb-6 md:mb-8 gradient-text-bitcoin font-space relative z-10">
             Tiptide
           </h1>
-          <div className="brutal-card-accent p-4 sm:p-6 md:p-8 mx-auto max-w-xs sm:max-w-2xl md:max-w-3xl relative z-10">
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-2 sm:mb-4 font-space">
-              Enhanced Nostr Zap Widget
+          <div className="brutal-card-accent p-3 sm:p-6 md:p-8 mx-auto max-w-sm sm:max-w-2xl md:max-w-3xl relative z-10">
+            <p className="text-base sm:text-xl md:text-2xl lg:text-3xl font-bold mb-2 sm:mb-4 font-space">
+              Yakihonne Smart Widget
             </p>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl font-jetbrains text-muted-foreground mb-4">
-              Live Lightning Network tips • Yakihonne integration • Multi-relay coverage
+            <p className="text-xs sm:text-base md:text-lg lg:text-xl font-jetbrains text-muted-foreground mb-3 sm:mb-4">
+              Live Lightning Network tips • Enhanced Nostr integration
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mt-4 sm:mt-6">
-              <Badge variant="accent" className="font-jetbrains text-xs sm:text-sm">
-                ⚡ Yakihonne Relays
+            <div className="flex flex-wrap items-center justify-center gap-1 sm:gap-4 mt-3 sm:mt-6">
+              <Badge variant="accent" className="font-jetbrains text-xs">
+                ⚡ Yakihonne
               </Badge>
-              <Badge variant="secondary" className="font-jetbrains text-xs sm:text-sm">
-                🌐 30+ Relays
+              <Badge variant="secondary" className="font-jetbrains text-xs">
+                🌐 Multi-relay
               </Badge>
-              <Badge variant="success" className="font-jetbrains text-xs sm:text-sm">
-                📊 Real-time Data
+              <Badge variant="success" className="font-jetbrains text-xs">
+                📊 Real-time
               </Badge>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 max-w-6xl">
+      <div className="container mx-auto px-3 sm:px-6 py-6 sm:py-12 max-w-6xl">
 
-        {/* Enhanced Demo Section */}
-        <div className="grid gap-6 sm:gap-8 md:gap-12 lg:grid-cols-2">
+        {/* Enhanced Demo Section - Mobile First */}
+        <div className="grid gap-4 sm:gap-8 lg:grid-cols-2">
           {/* Widget Demo */}
-          <div className="space-y-6 sm:space-y-8">
+          <div className="space-y-4 sm:space-y-8">
             <Card>
-              <CardHeader>
+              <CardHeader className="pb-3 sm:pb-6">
                 <CardTitle className="text-foreground flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                  <span className="text-base sm:text-lg">Enhanced Live Widget Demo</span>
-                  <div className="flex items-center space-x-2">
+                  <span className="text-sm sm:text-lg">Yakihonne Smart Widget</span>
+                  <div className="flex items-center gap-1 sm:gap-2">
                     <Badge variant="accent" className="font-jetbrains text-xs">
-                      ⚡ Yakihonne
+                      ⚡ Live
                     </Badge>
                     <Badge variant="success" className="font-jetbrains text-xs">
-                      Live
+                      Enhanced
                     </Badge>
                   </div>
                 </CardTitle>
@@ -197,50 +192,51 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            {/* Enhanced Controls */}
-            <div className="flex items-center justify-between">
+            {/* Mobile-optimized Controls */}
+            <div className="flex flex-col sm:flex-row items-center gap-3 sm:justify-between">
               <Button
                 variant={compactMode ? "bitcoin" : "outline"}
                 onClick={() => setCompactMode(!compactMode)}
-                className="font-jetbrains"
+                className="font-jetbrains w-full sm:w-auto"
+                size="sm"
               >
-                {compactMode ? 'Full Mode' : 'Compact Mode'}
+                {compactMode ? 'Full Mode' : 'Compact'}
               </Button>
-              <div className="brutal-border bg-card p-3 brutal-shadow-sm rounded-md">
-                <span className="text-sm font-semibold text-muted-foreground font-jetbrains">
-                  Enhanced with {enhancedRelays.filter(r => r.includes('yakihonne')).length} Yakihonne relays
+              <div className="brutal-border bg-card p-2 sm:p-3 brutal-shadow-sm rounded-md w-full sm:w-auto">
+                <span className="text-xs sm:text-sm font-semibold text-muted-foreground font-jetbrains block text-center sm:text-left">
+                  {enhancedRelays.filter(r => r.includes('yakihonne')).length} Yakihonne relays
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Enhanced Controls */}
-          <div className="space-y-8">
+          {/* Enhanced Controls - Mobile Optimized */}
+          <div className="space-y-4 sm:space-y-8">
             <Card>
-              <CardHeader>
-                <CardTitle className="text-foreground flex items-center justify-between">
-                  Try Different Posts
-                  <Badge variant="accent" className="font-jetbrains text-xs">
+              <CardHeader className="pb-3 sm:pb-6">
+                <CardTitle className="text-foreground flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                  <span className="text-sm sm:text-base">Try Different Posts</span>
+                  <Badge variant="accent" className="font-jetbrains text-xs w-fit">
                     Enhanced Data
                   </Badge>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-3 sm:space-y-4">
                 {examplePosts.map((post) => (
                   <Button
                     key={post.id}
                     variant={postId === post.id ? "bitcoin" : "outline"}
-                    className="w-full justify-start text-left p-6 font-jetbrains"
+                    className="w-full justify-start text-left p-3 sm:p-6 font-jetbrains"
                     onClick={() => setPostId(post.id)}
                   >
                     <div className="w-full">
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="font-bold text-lg">{post.title}</div>
-                        <Badge variant="outline" className="text-xs">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-2 mb-1 sm:mb-2">
+                        <div className="font-bold text-sm sm:text-lg">{post.title}</div>
+                        <Badge variant="outline" className="text-xs w-fit">
                           {post.source}
                         </Badge>
                       </div>
-                      <div className="text-sm text-muted-foreground font-normal">
+                      <div className="text-xs sm:text-sm text-muted-foreground font-normal">
                         {post.description}
                       </div>
                     </div>
@@ -250,33 +246,38 @@ const Index = () => {
             </Card>
 
             <Card>
-              <CardHeader>
-                <CardTitle className="text-foreground">Custom Post ID</CardTitle>
+              <CardHeader className="pb-3 sm:pb-6">
+                <CardTitle className="text-foreground text-sm sm:text-base">Custom Post ID</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <Label htmlFor="custom-post" className="font-semibold font-jetbrains">
+              <CardContent className="space-y-3 sm:space-y-4">
+                <Label htmlFor="custom-post" className="font-semibold font-jetbrains text-xs sm:text-sm">
                   Enter Real Nostr Note ID
                 </Label>
-                <div className="flex space-x-3">
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                   <Input
                     id="custom-post"
                     placeholder="note1... or hex format"
                     value={customPostId}
                     onChange={(e) => setCustomPostId(e.target.value)}
-                    className="brutal-border font-jetbrains"
+                    className="brutal-border font-jetbrains text-xs sm:text-sm"
                   />
-                  <Button variant="bitcoin" onClick={handleCustomPostId} className="font-jetbrains">
+                  <Button 
+                    variant="bitcoin" 
+                    onClick={handleCustomPostId} 
+                    className="font-jetbrains text-xs sm:text-sm w-full sm:w-auto"
+                    size="sm"
+                  >
                     Load
                   </Button>
                 </div>
-                <div className="brutal-border bg-accent/10 p-4 brutal-shadow-accent rounded-md">
+                <div className="brutal-border bg-accent/10 p-3 sm:p-4 brutal-shadow-accent rounded-md">
                   <p className="text-xs font-semibold text-foreground font-jetbrains mb-2">
-                    ⚡ Enhanced Yakihonne Integration Active!
+                    ⚡ Yakihonne Integration Active!
                   </p>
                   <p className="text-xs text-muted-foreground font-jetbrains mb-2">
-                    Prioritizing Yakihonne relays for optimal zap data coverage
+                    Prioritized relay connection for optimal data coverage
                   </p>
-                  <div className="flex items-center space-x-2 text-xs">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-xs">
                     <Badge variant="accent" className="text-xs">
                       4 Yakihonne relays
                     </Badge>
@@ -290,62 +291,62 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Enhanced Feature Highlights */}
-        <div className="mt-20 grid gap-8 md:grid-cols-3">
+        {/* Enhanced Feature Highlights - Mobile Optimized */}
+        <div className="mt-12 sm:mt-20 grid gap-4 sm:gap-8 md:grid-cols-3">
           <Card className="bg-accent/10 text-center">
-            <CardContent className="p-8">
-              <div className="text-6xl mb-6">⚡</div>
-              <CardTitle className="mb-4 text-foreground">Yakihonne Priority</CardTitle>
-              <p className="text-sm text-muted-foreground font-jetbrains">
-                Prioritized connection to Yakihonne relays for enhanced zap data coverage and reliability
+            <CardContent className="p-4 sm:p-8">
+              <div className="text-4xl sm:text-6xl mb-3 sm:mb-6">⚡</div>
+              <CardTitle className="mb-2 sm:mb-4 text-foreground text-sm sm:text-base">Yakihonne Priority</CardTitle>
+              <p className="text-xs sm:text-sm text-muted-foreground font-jetbrains">
+                Prioritized connection to Yakihonne relays for enhanced data coverage
               </p>
             </CardContent>
           </Card>
           
           <Card className="bg-bitcoin/10 text-center">
-            <CardContent className="p-8">
-              <div className="text-6xl mb-6">🌐</div>
-              <CardTitle className="mb-4 text-foreground">Multi-Relay Coverage</CardTitle>
-              <p className="text-sm text-muted-foreground font-jetbrains">
-                Connected to 30+ high-quality Nostr relays for comprehensive Lightning Network data
+            <CardContent className="p-4 sm:p-8">
+              <div className="text-4xl sm:text-6xl mb-3 sm:mb-6">🌐</div>
+              <CardTitle className="mb-2 sm:mb-4 text-foreground text-sm sm:text-base">Multi-Relay Network</CardTitle>
+              <p className="text-xs sm:text-sm text-muted-foreground font-jetbrains">
+                Connected to 30+ high-quality Nostr relays for comprehensive data
               </p>
             </CardContent>
           </Card>
           
           <Card className="bg-info/10 text-center">
-            <CardContent className="p-8">
-              <div className="text-6xl mb-6">📊</div>
-              <CardTitle className="mb-4 text-foreground">Enhanced Analytics</CardTitle>
-              <p className="text-sm text-muted-foreground font-jetbrains">
-                Advanced zap tracking with relay source identification and performance metrics
+            <CardContent className="p-4 sm:p-8">
+              <div className="text-4xl sm:text-6xl mb-3 sm:mb-6">📊</div>
+              <CardTitle className="mb-2 sm:mb-4 text-foreground text-sm sm:text-base">Smart Analytics</CardTitle>
+              <p className="text-xs sm:text-sm text-muted-foreground font-jetbrains">
+                Advanced zap tracking with performance metrics and insights
               </p>
             </CardContent>
           </Card>
         </div>
 
-        {/* Enhanced Technical Details */}
-        <Card className="mt-20 bg-muted/10">
-          <CardHeader>
-            <CardTitle className="text-foreground">Enhanced Nostr Integration</CardTitle>
+        {/* Enhanced Technical Details - Mobile Friendly */}
+        <Card className="mt-12 sm:mt-20 bg-muted/10">
+          <CardHeader className="pb-3 sm:pb-6">
+            <CardTitle className="text-foreground text-sm sm:text-base">Enhanced Nostr Integration</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-8 md:grid-cols-2">
-              <div className="brutal-border bg-accent/10 p-6 brutal-shadow-accent rounded-md">
-                <h4 className="font-bold mb-4 text-accent text-xl font-space">
+            <div className="grid gap-4 sm:gap-8 md:grid-cols-2">
+              <div className="brutal-border bg-accent/10 p-4 sm:p-6 brutal-shadow-accent rounded-md">
+                <h4 className="font-bold mb-2 sm:mb-4 text-accent text-sm sm:text-xl font-space">
                   Yakihonne Integration ⚡
                 </h4>
-                <ul className="space-y-2 font-jetbrains text-sm">
+                <ul className="space-y-1 sm:space-y-2 font-jetbrains text-xs sm:text-sm">
                   <li className="text-muted-foreground">• Priority connection to 4 Yakihonne relays</li>
                   <li className="text-muted-foreground">• Enhanced zap data coverage and reliability</li>
-                  <li className="text-muted-foreground">• Optimized for Yakihonne ecosystem content</li>
+                  <li className="text-muted-foreground">• Optimized for Yakihonne ecosystem</li>
                   <li className="text-muted-foreground">• Real-time performance monitoring</li>
                 </ul>
               </div>
-              <div className="brutal-border bg-bitcoin/10 p-6 brutal-shadow-bitcoin rounded-md">
-                <h4 className="font-bold mb-4 text-bitcoin text-xl font-space">
+              <div className="brutal-border bg-bitcoin/10 p-4 sm:p-6 brutal-shadow-bitcoin rounded-md">
+                <h4 className="font-bold mb-2 sm:mb-4 text-bitcoin text-sm sm:text-xl font-space">
                   Multi-Relay Architecture
                 </h4>
-                <ul className="space-y-2 font-jetbrains text-sm">
+                <ul className="space-y-1 sm:space-y-2 font-jetbrains text-xs sm:text-sm">
                   <li className="text-muted-foreground">• 30+ high-quality Nostr relays</li>
                   <li className="text-muted-foreground">• Intelligent relay prioritization</li>
                   <li className="text-muted-foreground">• Automatic failover and redundancy</li>

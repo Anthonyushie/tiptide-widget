@@ -52,24 +52,24 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
         <div className="absolute top-1/2 right-16 text-5xl text-success/10 animate-pulse-glow">⚡</div>
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 py-4 sm:py-6 max-w-7xl">
-        {/* Header */}
-        <div className="mb-4 sm:mb-6">
-          <div className="brutal-card-accent p-4 sm:p-6 md:p-8 text-center">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-4 gradient-text-bitcoin font-space">
+      <div className="relative z-10 container mx-auto px-3 sm:px-6 py-3 sm:py-6 max-w-7xl">
+        {/* Header - Mobile Optimized */}
+        <div className="mb-3 sm:mb-6">
+          <div className="brutal-card-accent p-3 sm:p-6 md:p-8 text-center">
+            <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-1 sm:mb-4 gradient-text-bitcoin font-space">
               Analytics Dashboard
             </h1>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl font-jetbrains text-muted-foreground">
+            <p className="text-xs sm:text-base md:text-lg lg:text-xl font-jetbrains text-muted-foreground">
               Deep insights into Lightning Network zap activity
             </p>
           </div>
         </div>
 
-        {/* Stats Overview */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
+        {/* Stats Overview - Mobile First Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 lg:gap-6 mb-4 sm:mb-8">
           <Card className="bg-accent/10">
-            <CardContent className="p-4 sm:p-6 text-center">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-accent mb-1 sm:mb-2 font-jetbrains">
+            <CardContent className="p-3 sm:p-6 text-center">
+              <div className="text-lg sm:text-3xl md:text-4xl font-bold text-accent mb-1 font-jetbrains">
                 1,247
               </div>
               <div className="text-xs sm:text-sm font-semibold text-muted-foreground">
@@ -79,8 +79,8 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
           </Card>
           
           <Card className="bg-bitcoin/10">
-            <CardContent className="p-4 sm:p-6 text-center">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-bitcoin mb-1 sm:mb-2 font-jetbrains">
+            <CardContent className="p-3 sm:p-6 text-center">
+              <div className="text-lg sm:text-3xl md:text-4xl font-bold text-bitcoin mb-1 font-jetbrains">
                 89.2K
               </div>
               <div className="text-xs sm:text-sm font-semibold text-muted-foreground">
@@ -90,8 +90,8 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
           </Card>
           
           <Card className="bg-success/10">
-            <CardContent className="p-4 sm:p-6 text-center">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-success mb-1 sm:mb-2 font-jetbrains">
+            <CardContent className="p-3 sm:p-6 text-center">
+              <div className="text-lg sm:text-3xl md:text-4xl font-bold text-success mb-1 font-jetbrains">
                 156
               </div>
               <div className="text-xs sm:text-sm font-semibold text-muted-foreground">
@@ -101,8 +101,8 @@ const Analytics = ({ onBackToWidget }: AnalyticsProps) => {
           </Card>
           
           <Card className="bg-info/10">
-            <CardContent className="p-4 sm:p-6 text-center">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-info mb-1 sm:mb-2 font-jetbrains">
+            <CardContent className="p-3 sm:p-6 text-center">
+              <div className="text-lg sm:text-3xl md:text-4xl font-bold text-info mb-1 font-jetbrains">
                 23
               </div>
               <div className="text-xs sm:text-sm font-semibold text-muted-foreground">
